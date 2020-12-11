@@ -2,14 +2,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { ApplicationViews } from "./ApplicationViews";
-import { NavBar } from "./nav/NavBar";
-import { Login } from "./auth/Login";
-import { Register } from "./auth/Register";
-import { UserProvider } from "./Profiles/UserProvider";
+import { NavBar } from "./Nav/Nav";
+import { Login } from "./Auth/Login";
+import { Register } from "./Auth/Register";
+import { MusicianProvider } from "./Musicians/MusicianProvider";
 
 export const Listen = () => (
   <>
-    <UserProvider>
+    <MusicianProvider>
       <Route
         render={() => {
           if (localStorage.getItem("listen_user_id")) {
@@ -24,7 +24,7 @@ export const Listen = () => (
           }
         }}
       />
-    </UserProvider>
+    </MusicianProvider>
 
     <Route
       path="/login"
