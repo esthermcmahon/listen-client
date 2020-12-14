@@ -8,7 +8,7 @@ import {
   TextInput,
   Text
 } from "grommet"
-// import { Audio, Transformation, CloudinaryContext } from 'cloudinary-react'
+
 
 
 export const NewRecording = (props) => {
@@ -41,14 +41,10 @@ export const NewRecording = (props) => {
       date: jsonDate
 
     }
-    // recorderState.url
 
     createRecording(newRecording)
       .then(() => props.history.push("/home"))
   }
-
-  // var cloudinary_api = "https://api.cloudinary.com/v1_1/dkicrisrl/mh/upload"
-  // var cloudinary_upload_preset = "zv6murma/raw/upload"
 
 
   const uploadAudio = () => {
@@ -74,8 +70,6 @@ export const NewRecording = (props) => {
         .then(res => {
           const audioresult = res
           setAudio(audioresult.secure_url)
-          // setAudio(data.secure_url)
-          console.log(audio)
         })   
 
     }
@@ -129,8 +123,6 @@ export const NewRecording = (props) => {
         handleRest={() => handleReset()}
 
       />
-
-      {/* <Audio src={recorderState.url} cloudName="dkicrisrl" controls publicId="dkicrisrl" type="ogg" onClick={uploadAudio} /> */}
 
 
       <Box>
