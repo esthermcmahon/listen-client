@@ -54,7 +54,7 @@ export const NewRecording = (props) => {
   const uploadAudio = () => {
     var reader = new FileReader()
 
-    reader.readAsDataURL(recorderState)
+    reader.readAsDataURL(recorderState.blob)
     reader.onloadend = function () {
       var base64data = reader.result
       // console.log(base64data)
@@ -92,23 +92,14 @@ export const NewRecording = (props) => {
     }
   })
 
-  useEffect(() => {
-    if (recorderState.blob !== null) {
-      uploadAudio()
-    }
-    
-  }, [recorderState])
-
   const handleAudioStop = (data) => {
     console.log(data)
-    // setRecorderState(data)
-
+    setRecorderState(data)
+    
   }
-
-  const handleAudioUpload = (file) => {
-    setRecorderState(file)
-    console.log(recorderState)
-    console.log(file);
+  
+  const handleAudioUpload = () => {
+    uploadAudio()
   }
 
   const handleReset = () => {
