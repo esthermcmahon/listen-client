@@ -77,6 +77,7 @@ const getGoalByRecording = (recordingId) => {
         goal,
         setGoal,
         goals,
+        getGoals,
         setGoal,
         createGoal,
         deleteGoal,
