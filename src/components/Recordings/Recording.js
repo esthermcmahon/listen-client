@@ -14,7 +14,7 @@ import {
     Heading,
     Text,
 } from "grommet";
-
+import {CommentList} from "../Comments/CommentList"
 
 export const Recording = (props) => {
     const { getRecordingById, deleteRecording } = useContext(RecordingContext)
@@ -57,6 +57,7 @@ export const Recording = (props) => {
                     <Box margin="medium">
 
                         <GoalsPerRecording recordingId={recordingObject.id} {...props} />
+                        <CommentList recordingId={recordingObject.id} {...props} />
 
                     </Box>
                 </Box>
