@@ -15,10 +15,13 @@ import {
     Text,
 } from "grommet";
 
+
 export const Recording = (props) => {
-    const { getRecordingById } = useContext(RecordingContext)
+    const { getRecordingById, deleteRecording } = useContext(RecordingContext)
 
     const [recordingObject, setRecordingObject] = useState({})
+
+   
 
     useEffect(() => {
         getRecordingById(props.recordingId)
@@ -27,14 +30,22 @@ export const Recording = (props) => {
 
     return (
         <>
+  
             <Box>
                 <Box margin="medium">
                     <Heading level="3" >{recordingObject.label}</Heading>
                     <Text>{recordingObject.date}</Text>
-                    <audio controls>
-                        <source src={recordingObject.audio} type="audio/ogg" format="audio/ogg"></source>
-                        <source src={recordingObject.audio} type="audio/mpeg" format="audio/mpeg"></source>
-                    </audio>
+
+                    <audio src={recordingObject.audio} controls />
+                    
+                    {/* <Button 
+                        // icon={Trash}
+                        label="Delete"
+                        onClick={() => deleteRecording(recordingObject.id)}
+
+                    /> */}
+                       
+                   
                     <Button
                         primary
                         as={Link}
