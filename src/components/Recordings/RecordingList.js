@@ -1,4 +1,4 @@
-//module to play a recording and render its date and label
+//module to list recordings on the excerpt details
 import React, { useEffect, useContext, useState } from "react";
 import { RecordingContext } from "./RecordingProvider";
 import { Button, Box, Heading, List, Text } from "grommet";
@@ -19,11 +19,10 @@ export const RecordingList = (props) => {
 
   return (
     <Box>
-      <Heading level="3">Recordings</Heading>
+      <Heading level="2">Recordings</Heading>
 
       <Box className="categoryList" direction="row">
         <Box background="background-contrast" elevation="small">
-        <List data={recordings} primaryKey="label" />
         </Box>
         <Box>
 
