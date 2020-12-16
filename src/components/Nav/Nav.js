@@ -25,7 +25,7 @@ export const NavBar = () => {
                 <Box direction="row-responsive" gap="small" align="baseline">
                 <Anchor color="text-weak" as={Link} className="navbar__link" to="/home" label="Home"/>
                 <Anchor color="text-weak" as={Link} className="navbar__link" to="/myconnections" label="My Connections"/>
-                <Anchor color="text-weak" as={Link} className="navbar__link" to="/newexcerpt"label="New Excerpt"/>
+                <Anchor color="text-weak" as={Link} className="navbar__link" to="/excerpts/create"label="New Excerpt"/>
                 
             {
                 (localStorage.getItem("listen_user_id") !== null) ?
