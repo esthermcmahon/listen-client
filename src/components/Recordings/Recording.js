@@ -37,14 +37,7 @@ export const Recording = (props) => {
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
-                    
-                    {/* <Button 
-                        // icon={Trash}
-                        label="Delete"
-                        onClick={() => deleteRecording(recordingObject.id)}
-
-                    /> */}
-                       
+        
                    
                     <Button
                         primary

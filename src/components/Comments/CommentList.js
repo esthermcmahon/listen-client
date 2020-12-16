@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { CommentContext } from "./CommentProvider"
 import { MusicianContext } from "../Musicians/MusicianProvider"
 import {
@@ -16,12 +16,15 @@ import {
 export const CommentList = (props) => {
     const {deleteComment, getCommentByRecording} = useContext(CommentContext)
     const {currentUser, getCurrentUser} = useContext(MusicianContext)
-    const deleteCommentDialog = useRef(null)
-    const editCommentDialog = useRef(null)
+   
+    const [comments, setComments] = useState([])
+
+
 
     //get the comments for this recording from the database
     useEffect(() => {
         getCommentByRecording(props.recordingId)
+        .then(setComments)
     }, [])
 
  
@@ -29,9 +32,21 @@ export const CommentList = (props) => {
 
     return (
         <Box>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
+            <Heading>Comments</Heading>
+            <Box>
+                {
+                    comments.map((comment) => {
+                        return (
+                            <>
+                            <Text>{comment.content}</Text>
+                            <Text>{comment.date}</Text>
+                            <Text>{comment.author}</Text>
+                            </>
+                        )
+                    })
+                }
+            </Box>
+            
         </Box>
      
     )
