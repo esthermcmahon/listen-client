@@ -1,35 +1,35 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ExcerptContext } from "./ExcerptProvider"
-import { Habit } from "./Habit"
+import { Excerpt } from "./Excerpt"
+import { MusicianContext } from "../Musicians/MusicianProvider"
 
 
 export const ExcerptList = (props) => {
-    const { excerpts, getExcerpts } = useContext(ExcerptContext)
+    const { excerpts, getExcerpts, getExcerptByMusician } = useContext(ExcerptContext)
+    const { getCurrentUser } = useContext(MusicianContext)
 
     const [filteredExcerpts, setFilteredExcerpts] = useState([])
 
     useEffect(() => {
-        getExcerpts()
+        getCurrentUser()
+            .then((user) => getExcerptByMusician(user.id))
+            .then(setFilteredExcerpts)
     }, [])
-
-    useEffect(() => {
-        setFilteredHabits(habits.filter(habit => habit.userId === parseInt(localStorage.getItem("BetterMe__user"))))
-    }, [habits])
-    
 
 
     return (
         <section>
-            <h3>Habits</h3>
-            <div className="habits">
+            <h3>Excerpts</h3>
+            <div className="excerpts">
 
                 {
-                    filteredHabits.map(habit => {
+                    filteredExcerpts.map(excerpt => {
 
-                        return habit.archive === false ? <Habit key={habit.id} habit={habit} {...props} /> : ""
+                        return excerpt.done === false ? <Excerpt key={excerpt.id} excerpt={excerpt} {...props} /> : ""
                     })
 
-                }
+               }
+
             </div>
         </section>
     )

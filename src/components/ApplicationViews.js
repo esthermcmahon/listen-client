@@ -8,9 +8,11 @@ import { GoalProvider } from "./Goals/GoalProvider"
 import { MusicianProvider } from "./Musicians/MusicianProvider"
 import { ExcerptProvider } from "./Excerpts/ExcerptProvider"
 import { NewRecording } from "./Recordings/NewRecording";
-import { PlayRecording } from "./Recordings/PlayRecording";
+import { PlayRecording } from "./Recordings/RecordingList";
 import { RecordingProvider } from "./Recordings/RecordingProvider"
 import { ExcerptForm } from "./Excerpts/ExcerptForm";
+import { ExcerptList } from "./Excerpts/ExcerptList"
+import { ExcerptDetails } from "./Excerpts/ExcerptDetails"
 import { GoalForm } from "./Goals/GoalForm"
 
 export const ApplicationViews = (props) => {
@@ -21,15 +23,18 @@ export const ApplicationViews = (props) => {
                     margin: "5rem 2rem",
                     lineHeight: "1.75rem",
                 }}>
-                <RecordingProvider>
-                    <Route exact path="/excerpts/:excerptId(\d+)/newrecording" render={props => <NewRecording {...props}/>} />
-                    <Route exact path="/recordings" render={props => <PlayRecording {...props}/>} />
-                </RecordingProvider>
+              
 
                 <ExcerptProvider>
-                    <Route exact path = "/excerpts/create" render={props => <ExcerptForm {...props}/>} />
-                    <Route exact path = "/editexcerpt/:excerptId(\d+)" render = {props => <ExcerptForm {...props} />} />
+                    <RecordingProvider>
+                        <Route exact path="/excerpts/:excerptId(\d+)/newrecording" render={props => <NewRecording {...props}/>} />
+                        <Route exact path = "/excerpts/create" render={props => <ExcerptForm {...props}/>} />
+                        <Route exact path = "/editexcerpt/:excerptId(\d+)" render = {props => <ExcerptForm {...props} />} />
+                        <Route exact path = "/home" render = {props => <ExcerptList {...props} />} />
+                        <Route exact path = "/excerpts/:excerptId(\d+)" render = {props => <ExcerptDetails {...props} />} />
+                    </RecordingProvider>
                 </ExcerptProvider>
+                
                 <CategoryProvider>
                     <GoalProvider>
                         <Route exact path = "/goals/:recordingId(\d+)/create" render = {props => <GoalForm {...props} /> } />
