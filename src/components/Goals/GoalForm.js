@@ -12,10 +12,7 @@ export const GoalForm = (props) => {
   const editMode = props.match.url.split("/")[1] === "editgoal" //checks url to see if editMode
 
   const [currentGoal, setCurrentGoal] = useState({})
-
-//   const [categoryValue, setCategoryValue] = useState("")
  
-
   //state variable and functions that change state of the state variable
   const [open, setOpen] = useState();
   const onOpen = () => setOpen(true);
@@ -23,27 +20,24 @@ export const GoalForm = (props) => {
 
   const showHideClassName = open ? "modal display-block" : "modal display-none";
 
-  
-  useEffect(() => {
-    getCategories()
-  }, [])
-
   const recordingId = props.match.params.recordingId
 
+
   useEffect(() => {
-    if (editMode) {
-       
-      getGoalById(parseInt(props.match.params.goalId))
-        .then(goal => {
-          setCurrentGoal({
-              
-            recording: goal.recording,
-            category: goal.category,
-            goal: goal.goal,
-            action: goal.action
-          })
+      getCategories()
+        .then(() => {
+            if (editMode) {
+                getGoalById(parseInt(props.match.params.goalId))
+                    .then(goal => {
+                        setCurrentGoal({
+                            recording: goal.recording,
+                            category_id: goal.category.id,
+                            goal: goal.goal,
+                            action: goal.action
+                        })
+                    })
+            }
         })
-    }
   }, [])
 
   //function that is called when a change happens in the form. It sets the state variable that is imported via context.
@@ -51,11 +45,7 @@ export const GoalForm = (props) => {
   //and the value of the form input
   const handleChange = (event) => {
     const newGoalState = Object.assign({}, currentGoal)
-    // event.target.name === "category_id"
-    // ? newGoalState[event.target.name] = event.value
-    // : newGoalState[event.target.name] = event.target.value
     newGoalState[event.target.name] = event.target.value
-    console.log(newGoalState)
     setCurrentGoal(newGoalState)
     
   }
@@ -73,7 +63,7 @@ export const GoalForm = (props) => {
           onChange={handleChange}
         />
         </Box>
-        {/* <Box htmlFor="action"> */}
+      
         <Heading level="2" className="goal">Enter action:</Heading>
         <Box margin="small">
         <TextInput
@@ -88,19 +78,19 @@ export const GoalForm = (props) => {
             <FormField>
                 <div className="form-group">
                     <select name="category_id" className="form-control"
-                        value={currentGoal.category}
+                        value={currentGoal.category_id}
                         onChange={handleChange}>
 
                         <option value="0">Choose a category</option>
                         {categories.map(category => (
-                            <option key={category.id} value={category.id}>
+                            <option key={category.id} value={category.id} name={currentGoal.category}>
                                 {category.label}
                             </option>
                         ))}
                     </select>
                 </div>
             </FormField>
-          
+            
            
         </Box>
         
@@ -131,7 +121,6 @@ export const GoalForm = (props) => {
                   recording: parseInt(recordingId)
 
                 }).then(() => {
-                    debugger
                   props.history.push("/home")
                 })
               }}
@@ -165,28 +154,50 @@ export const GoalForm = (props) => {
 
   
 
-
-  
-
   )
 };
 
-
+// const handleChange = (event) => {
+//     // const newGoalState = Object.assign({}, currentGoal)
+//     // event.target.name === "category_id"
+//     // ? newGoalState[event.target.name] = event.value
+//     // : newGoalState[event.target.name] = event.target.value
+//     currentGoal[event.target.name] = event.target.value
+//     console.log(currentGoal)
+//     setCurrentGoal(currentGoal)
+    
+//   }
             
 //if refactoring with grommet
-{/* <FormField>
+            
+            {/* <FormField>
               <Select
                 id={categories.id}
-                // id={currentGoal.category_id}
                 name="category_id"
                 placeholder="Categories"
-                value={currentGoal.category_id}
+                value={categories.id}
                 labelKey="label"
                 valueKey={{ key: "id", reduce: true }}
-                // valueKey = "id"
                 options={categories}
                 onChange = {handleChange}
-                // onChange = {(option) => setCategoryValue(option)}
+                
               />
 
-            </FormField> */}
+            </FormField>  */}
+          
+//   useEffect(() => {
+//     if (editMode) {
+//         getCategories()
+//         getGoalById(parseInt(props.match.params.goalId))
+//             .then(goal => {
+//             setCurrentGoal({ 
+//                 recording: goal.recording,
+//                 category_id: goal.category.id,
+//                 goal: goal.goal,
+//                 action: goal.action
+//             })
+//         })
+//     } else {
+//         getCategories()
+//     }
+//   }, [])
