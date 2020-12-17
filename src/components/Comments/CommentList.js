@@ -35,7 +35,7 @@ export const CommentList = (props) => {
 
     return (
         <Box>
-            <Heading>Comments</Heading>
+            <Heading level="3">Comments</Heading>
             <Box>
                 {
                     comments.map((comment) => {
@@ -45,7 +45,7 @@ export const CommentList = (props) => {
                                 <Text>{comment.date}</Text>
                                 <Text>{comment.author.user.first_name} {comment.author.user.last_name}</Text>
 
-                                {comment.author.user == currentUser ?
+                                {comment.created_by_current_user ?
                                     <Button
                                         primary
                                         as={Link}
