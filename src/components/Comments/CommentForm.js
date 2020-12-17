@@ -27,7 +27,9 @@ export const CommentForm = (props) => {
                 .then(comment => {
                     setCurrentComment({
                         recording: comment.recording,
-                        content: comment.content
+                        content: comment.content,
+                        author: comment.author,
+                        date: comment.date
                     })
                 })
         }
@@ -52,7 +54,7 @@ export const CommentForm = (props) => {
                 <Box margin="small">
                     <TextInput
                         type="text"
-                        name="goal"
+                        name="content"
                         value={currentComment.content}
                         onChange={handleChange}
                     />
