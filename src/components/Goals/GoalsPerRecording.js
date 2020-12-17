@@ -16,6 +16,8 @@ export const GoalsPerRecording = (props) => {
     const onOpen = () => setOpen(true);
     const onClose = () => setOpen(undefined);
 
+    const relatedExcerpt = props.relatedExcerpt
+
     //gets the goals from the database
     useEffect(() => {
         getGoalByRecording(props.recordingId)
@@ -38,33 +40,38 @@ export const GoalsPerRecording = (props) => {
                                         <Heading level="3">{goal.category.label}</Heading>
                                         <Text>Goal: {goal.goal}</Text>
                                         <Text>Action: {goal.action}</Text>
-                                        <Box width="xsmall">
-                                            <Menu
-                                                icon={<More />}
-                                                hoverIndicator
-                                                alignSelf="center"
-                                                size="small"
-                                                items={[
-                                                    {
-                                                        icon: (
-                                                            <Box>
-                                                                <Edit />
-                                                            </Box>
-                                                        ),
-                                                        onClick: () =>
-                                                            props.history.push(`/editgoal/${goal.id}/${props.recordingId}`),
-                                                    },
-                                                    {
-                                                        icon: (
-                                                            <Box>
-                                                                <Trash />
-                                                            </Box>
-                                                        ),
-                                                        onClick: () => onOpen(),
-                                                    },
-                                                ]}
-                                            />
-                                        </Box>
+                                        {relatedExcerpt.created_by_current_user ?
+                                            <Box width="xsmall">
+                                                <Menu
+                                                    icon={<More />}
+                                                    hoverIndicator
+                                                    alignSelf="center"
+                                                    size="small"
+                                                    items={[
+                                                        {
+                                                            icon: (
+                                                                <Box>
+                                                                    <Edit />
+                                                                </Box>
+                                                            ),
+                                                            onClick: () =>
+                                                                props.history.push(`/editgoal/${goal.id}/${props.recordingId}`),
+                                                        },
+                                                        {
+                                                            icon: (
+                                                                <Box>
+                                                                    <Trash />
+                                                                </Box>
+                                                            ),
+                                                            onClick: () => onOpen(),
+                                                        },
+                                                    ]}
+                                                />
+                                            </Box>
+                                            : ""
+                                        }
+
+
                                     </Card>
 
                                 </Box>

@@ -6,6 +6,7 @@ export const MusicianProvider = (props) => {
     const [musicians, setMusicians] = useState([{user:{}}])
     const [musician, setMusician] = useState({user:{}})
     const [currentUser, setCurrentUser] = useState({user:{}})
+   
 
   const getMusicians = () => {
     return fetch("http://localhost:8000/musicians" , {
@@ -19,7 +20,7 @@ export const MusicianProvider = (props) => {
   };
 
     const getMusicianById = (id) => {
-        return fetch(`http://localhost:8000/musician/${id}`, {
+        return fetch(`http://localhost:8000/musicians/${id}`, {
             headers: {
                 Authorization: `Token ${localStorage.getItem("listen_user_id")}`,
                 "Content-Type": "application/json",

@@ -8,12 +8,14 @@ import { GoalProvider } from "./Goals/GoalProvider"
 import { MusicianProvider } from "./Musicians/MusicianProvider"
 import { ExcerptProvider } from "./Excerpts/ExcerptProvider"
 import { NewRecording } from "./Recordings/NewRecording";
-import { PlayRecording } from "./Recordings/RecordingList";
 import { RecordingProvider } from "./Recordings/RecordingProvider"
 import { ExcerptForm } from "./Excerpts/ExcerptForm";
 import { ExcerptList } from "./Excerpts/ExcerptList"
 import { ExcerptDetails } from "./Excerpts/ExcerptDetails"
 import { GoalForm } from "./Goals/GoalForm"
+import { MyConnections } from "./Connections/MyConnections";
+import { PracticerProfile } from "./Connections/PracticerProfile";
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -45,6 +47,24 @@ export const ApplicationViews = (props) => {
                         <Route exact path = "/editgoal/:goalId(\d+)/:recordingId(\d+)" render = {props => <GoalForm {...props} /> } />
                     </GoalProvider>
                 </CategoryProvider>
+                
+                <MusicianProvider>
+                    <ConnectionProvider>
+                        <Route exact path = "/connections" render = {props => <MyConnections {...props} /> } />
+                    </ConnectionProvider>
+                </MusicianProvider>
+
+                <MusicianProvider>
+                    <ConnectionProvider>
+                        <ExcerptProvider>
+                            <RecordingProvider>
+                                <GoalProvider>
+                                    <Route exact path = "/profiles/:practicerId(\d+)" render = {props => <PracticerProfile {...props} /> } />
+                                </GoalProvider>
+                            </RecordingProvider>
+                        </ExcerptProvider>
+                    </ConnectionProvider>
+                </MusicianProvider>
             </main>
         </>
 

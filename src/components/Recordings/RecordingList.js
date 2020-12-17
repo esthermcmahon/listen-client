@@ -28,7 +28,7 @@ export const RecordingList = (props) => {
 
           {recordings.map((recordingObject) => {
             return (
-              <Recording recordingId = {recordingObject.id} {...props}/>
+              <Recording recordingId = {recordingObject.id} {...props} excerptId={excerptId}/>
             );
           })}
         </Box>

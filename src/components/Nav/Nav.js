@@ -24,7 +24,7 @@ export const NavBar = () => {
                 </Box>
                 <Box direction="row-responsive" gap="small" align="baseline">
                 <Anchor color="text-weak" as={Link} className="navbar__link" to="/home" label="Home"/>
-                <Anchor color="text-weak" as={Link} className="navbar__link" to="/myconnections" label="My Connections"/>
+                <Anchor color="text-weak" as={Link} className="navbar__link" to="/connections" label="My Connections"/>
                 <Anchor color="text-weak" as={Link} className="navbar__link" to="/excerpts/create"label="New Excerpt"/>
                 
             {
