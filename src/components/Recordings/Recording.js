@@ -57,15 +57,23 @@ export const Recording = (props) => {
                             margin="small"
 
                         />
-                        : ""
-
-
+                        :
+                        <Button
+                            primary
+                            as={Link}
+                            to={{pathname: `/comments/${recordingObject.id}/create`}}
+                            label="Add Comment"
+                            margin="small"
+                        />
                     }
+
+
+                    
 
                     <Box margin="medium">
 
-                        <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt = {relatedExcerpt} />
-                        <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt = {relatedExcerpt} />
+                        <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
+                        <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
 
                     </Box>
                 </Box>
