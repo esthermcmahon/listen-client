@@ -61,17 +61,28 @@ const getConnectionById = (id) => {
       .then(res => res.json())
 }
 
+const unFollow = (practicerId) => {
+  return fetch(`http://localhost:8000/connections/${practicerId}/unfollow`, {
+      method: "PUT",
+      headers: {
+          Authorization: `Token ${localStorage.getItem("listen_user_id")}`,
+          "Content-Type": "application/json"
+  }})
+}
+
   return (
     <ConnectionContext.Provider
       value={{
         connection,
         setConnection,
         connections,
+        getConnections,
         setConnection,
         createConnection,
         deleteConnection,
         editConnection,
-        getConnectionById
+        getConnectionById,
+        unFollow
       }}
     >
       {props.children}

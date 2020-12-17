@@ -14,16 +14,27 @@ import {
     Heading,
     Text,
 } from "grommet";
-import {CommentList} from "../Comments/CommentList"
+import { CommentList } from "../Comments/CommentList"
+import { ExcerptContext } from "../Excerpts/ExcerptProvider"
 
 export const Recording = (props) => {
     const { getRecordingById, deleteRecording } = useContext(RecordingContext)
 
     const [recordingObject, setRecordingObject] = useState({})
 
+    const { getExcerptById } = useContext(ExcerptContext)
+
+    const [relatedExcerpt, setRelatedExcerpt] = useState({})
+
+    const excerptId = props.excerptId
+
+
     useEffect(() => {
         getRecordingById(props.recordingId)
             .then(setRecordingObject)
+
+        getExcerptById(excerptId)
+            .then(setRelatedExcerpt)
     }, [])
 
 
@@ -36,19 +47,25 @@ export const Recording = (props) => {
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
+                    {relatedExcerpt.created_by_current_user
+                        ?
+                        <Button
+                            primary
+                            as={Link}
+                            to={{ pathname: `/goals/${recordingObject.id}/create` }}
+                            label="Add Goal"
+                            margin="small"
 
-                    <Button
-                        primary
-                        as={Link}
-                        to={{ pathname: `/goals/${recordingObject.id}/create` }}
-                        label="Add Goal"
-                        margin="small"
+                        />
+                        : ""
 
-                    />
+
+                    }
+
                     <Box margin="medium">
 
-                        <GoalsPerRecording recordingId={recordingObject.id} {...props} />
-                        <CommentList recordingId={recordingObject.id} {...props} />
+                        <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt = {relatedExcerpt} />
+                        <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt = {relatedExcerpt} />
 
                     </Box>
                 </Box>

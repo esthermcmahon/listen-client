@@ -97,7 +97,6 @@ export const ExcerptForm = (props) => {
           type="submit"
           onClick={(evt) => {
             evt.preventDefault();
-            debugger
             createExcerpt({
               name: currentExcerpt.name,
               done: false,
