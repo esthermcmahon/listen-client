@@ -61,6 +61,16 @@ const getCommentById = (id) => {
       .then(res => res.json())
 }
 
+const getCommentByRecording = (recordingId) => {
+  return fetch(`http://localhost:8000/comments?recording=${recordingId}` , {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("listen_user_id")}`,
+        "Content-Type": "application/json",   
+      }   
+    })
+      .then(res => res.json())
+}
+
   return (
     <CommentContext.Provider
       value={{
@@ -72,7 +82,8 @@ const getCommentById = (id) => {
         createComment,
         deleteComment,
         editComment,
-        getCommentById
+        getCommentById,
+        getCommentByRecording
       }}
     >
       {props.children}

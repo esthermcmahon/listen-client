@@ -28,11 +28,13 @@ export const ApplicationViews = (props) => {
                 <ExcerptProvider>
                     <RecordingProvider>
                         <GoalProvider>
-                            <Route exact path="/excerpts/:excerptId(\d+)/newrecording" render={props => <NewRecording {...props}/>} />
-                            <Route exact path = "/excerpts/create" render={props => <ExcerptForm {...props}/>} />
-                            <Route exact path = "/editexcerpt/:excerptId(\d+)" render = {props => <ExcerptForm {...props} />} />
-                            <Route exact path = "/home" render = {props => <ExcerptList {...props} />} />
-                            <Route exact path = "/excerpts/:excerptId(\d+)" render = {props => <ExcerptDetails {...props} />} />
+                            <CommentProvider>
+                                <Route exact path="/excerpts/:excerptId(\d+)/newrecording" render={props => <NewRecording {...props}/>} />
+                                <Route exact path = "/excerpts/create" render={props => <ExcerptForm {...props}/>} />
+                                <Route exact path = "/editexcerpt/:excerptId(\d+)" render = {props => <ExcerptForm {...props} />} />
+                                <Route exact path = "/home" render = {props => <ExcerptList {...props} />} />
+                                <Route exact path = "/excerpts/:excerptId(\d+)" render = {props => <ExcerptDetails {...props} />} />
+                            </CommentProvider>
                         </GoalProvider>
                     </RecordingProvider>
                 </ExcerptProvider>

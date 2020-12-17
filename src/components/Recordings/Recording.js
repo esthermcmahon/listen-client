@@ -14,38 +14,29 @@ import {
     Heading,
     Text,
 } from "grommet";
-
+import {CommentList} from "../Comments/CommentList"
 
 export const Recording = (props) => {
     const { getRecordingById, deleteRecording } = useContext(RecordingContext)
 
     const [recordingObject, setRecordingObject] = useState({})
 
-   
-
     useEffect(() => {
         getRecordingById(props.recordingId)
             .then(setRecordingObject)
     }, [])
 
+
     return (
         <>
-  
+
             <Box>
                 <Box margin="medium">
                     <Heading level="3" >{recordingObject.label}</Heading>
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
-                    
-                    {/* <Button 
-                        // icon={Trash}
-                        label="Delete"
-                        onClick={() => deleteRecording(recordingObject.id)}
 
-                    /> */}
-                       
-                   
                     <Button
                         primary
                         as={Link}
@@ -57,6 +48,7 @@ export const Recording = (props) => {
                     <Box margin="medium">
 
                         <GoalsPerRecording recordingId={recordingObject.id} {...props} />
+                        <CommentList recordingId={recordingObject.id} {...props} />
 
                     </Box>
                 </Box>
