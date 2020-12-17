@@ -21,24 +21,22 @@ export const Recording = (props) => {
 
     const [recordingObject, setRecordingObject] = useState({})
 
-   
-
     useEffect(() => {
         getRecordingById(props.recordingId)
             .then(setRecordingObject)
     }, [])
 
+
     return (
         <>
-  
+
             <Box>
                 <Box margin="medium">
                     <Heading level="3" >{recordingObject.label}</Heading>
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
-        
-                   
+
                     <Button
                         primary
                         as={Link}

@@ -40,7 +40,7 @@ export const CommentList = (props) => {
                             <>
                             <Text>{comment.content}</Text>
                             <Text>{comment.date}</Text>
-                            <Text>{comment.author}</Text>
+                            <Text>{comment.author.user.first_name} {comment.author.user.last_name}</Text>
                             </>
                         )
                     })
