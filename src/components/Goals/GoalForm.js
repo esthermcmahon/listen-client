@@ -38,6 +38,8 @@ export const GoalForm = (props) => {
                     })
             }
         })
+
+        console.log(props)
   }, [])
 
   //function that is called when a change happens in the form. It sets the state variable that is imported via context.
@@ -121,7 +123,7 @@ export const GoalForm = (props) => {
                   recording: parseInt(recordingId)
 
                 }).then(() => {
-                  props.history.push("/home")
+                  props.history.goBack()
                 })
               }}
               margin="small"
@@ -145,7 +147,7 @@ export const GoalForm = (props) => {
               category: parseInt(currentGoal.category_id),
               recording: parseInt(recordingId)
             })
-              .then(() => props.history.push("/home"))
+              .then(() => props.history.goBack())
           }}
          
         />
