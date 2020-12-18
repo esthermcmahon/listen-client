@@ -71,6 +71,30 @@ const getExcerptByMusician = (musicianId) => {
         .then(res => res.json())
 }
 
+const done = excerptId => {
+  return fetch(`http://localhost:8000/excerpts/${excerptId}/done`, {
+      method: "PUT",
+      headers: {
+          Authorization: `Token ${localStorage.getItem("listen_user_id")}`,
+          "Content-Type": "application/json"
+      }
+    
+  })
+      
+}
+const undone = excerptId => {
+  return fetch(`http://localhost:8000/excerpts/${excerptId}/undone`, {
+      method: "PUT",
+      headers: {
+          Authorization: `Token ${localStorage.getItem("listen_user_id")}`,
+          "Content-Type": "application/json"
+      }
+    
+  })
+      
+}
+
+
   return (
     <ExcerptContext.Provider
       value={{
@@ -83,7 +107,9 @@ const getExcerptByMusician = (musicianId) => {
         deleteExcerpt,
         editExcerpt,
         getExcerptById,
-        getExcerptByMusician
+        getExcerptByMusician,
+        done,
+        undone
       }}
     >
       {props.children}

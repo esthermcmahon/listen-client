@@ -16,6 +16,7 @@ import { GoalForm } from "./Goals/GoalForm"
 import { MyConnections } from "./Connections/MyConnections";
 import { PracticerProfile } from "./Connections/PracticerProfile";
 import { CommentForm } from "./Comments/CommentForm"
+import { CompletedExcerpts } from "./Excerpts/CompletedExcerpts"
 
 
 export const ApplicationViews = (props) => {
@@ -37,6 +38,7 @@ export const ApplicationViews = (props) => {
                                 <Route exact path = "/editexcerpt/:excerptId(\d+)" render = {props => <ExcerptForm {...props} />} />
                                 <Route exact path = "/home" render = {props => <ExcerptList {...props} />} />
                                 <Route exact path = "/excerpts/:excerptId(\d+)" render = {props => <ExcerptDetails {...props} />} />
+                                <Route exact path = "/completed" render = {props => <CompletedExcerpts {...props} />} />
                             </CommentProvider>
                         </GoalProvider>
                     </RecordingProvider>

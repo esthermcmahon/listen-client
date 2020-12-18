@@ -26,6 +26,7 @@ export const NavBar = () => {
                 <Anchor color="text-weak" as={Link} className="navbar__link" to="/home" label="Home"/>
                 <Anchor color="text-weak" as={Link} className="navbar__link" to="/connections" label="My Connections"/>
                 <Anchor color="text-weak" as={Link} className="navbar__link" to="/excerpts/create"label="New Excerpt"/>
+                <Anchor color="text-weak" as={Link} className="navbar__link" to="/completed"label="Completed"/>
                 
             {
                 (localStorage.getItem("listen_user_id") !== null) ?
