@@ -65,12 +65,16 @@ export const CompletedExcerpts = (props) => {
                                             </CardHeader>
                                         </Anchor>
                                     </CardHeader>
-                                    <Button
-                                        primary
-                                        onClick={() => undone(excerpt.id).then(func)}
-                                        label="Add to Dashboard"
-                                        margin="small"
-                                    />
+                                    {excerpt.created_by_current_user ?
+                                        <Button
+                                            primary
+                                            onClick={() => undone(excerpt.id).then(func)}
+                                            label="Add to Dashboard"
+                                            margin="small"
+                                        /> : ""
+
+                                    }
+
 
                                 </Card>
                             </Box>
