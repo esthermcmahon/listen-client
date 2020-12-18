@@ -32,6 +32,7 @@ export const CommentForm = (props) => {
                         date: comment.date
                     })
                 })
+                console.log(currentComment)
         }
 
     }, [])

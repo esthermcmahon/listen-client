@@ -35,6 +35,8 @@ export const Recording = (props) => {
 
         getExcerptById(excerptId)
             .then(setRelatedExcerpt)
+
+        
     }, [])
 
 
@@ -47,8 +49,8 @@ export const Recording = (props) => {
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
-                    {relatedExcerpt.created_by_current_user
-                        ?
+                    {relatedExcerpt.created_by_current_user 
+                        ? 
                         <Button
                             primary
                             as={Link}

@@ -27,6 +27,7 @@ export const CommentList = (props) => {
     useEffect(() => {
         getCommentByRecording(props.recordingId)
             .then(setComments)
+    
         
     }, [])
 
