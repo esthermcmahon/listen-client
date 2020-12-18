@@ -10,11 +10,18 @@ export const ExcerptList = (props) => {
 
     const [filteredExcerpts, setFilteredExcerpts] = useState([])
 
+    const [change, setChange] = useState(false)
+
+    const func = () => {
+        change ? setChange(false) : setChange(true)
+
+    }
+
     useEffect(() => {
         getCurrentUser()
             .then((user) => getExcerptByMusician(user.id))
             .then(setFilteredExcerpts)
-    }, [])
+    }, [change])
 
 
     return (
@@ -25,10 +32,10 @@ export const ExcerptList = (props) => {
                 {
                     filteredExcerpts.map(excerpt => {
 
-                        return excerpt.done === false ? <Excerpt key={excerpt.id} excerpt={excerpt} {...props} /> : ""
+                        return excerpt.done === false ? <Excerpt key={excerpt.id} excerpt={excerpt} {...props} func={func}/> : ""
                     })
 
-               }
+                }
 
             </div>
         </section>
