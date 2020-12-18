@@ -28,6 +28,10 @@ export const Recording = (props) => {
 
     const excerptId = props.excerptId
 
+    const toggleFunction = () => {
+        props.func()
+    } 
+
 
     useEffect(() => {
         getRecordingById(props.recordingId)
@@ -36,7 +40,7 @@ export const Recording = (props) => {
         getExcerptById(excerptId)
             .then(setRelatedExcerpt)
 
-        
+
     }, [])
 
 
@@ -49,28 +53,39 @@ export const Recording = (props) => {
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
-                    {relatedExcerpt.created_by_current_user 
-                        ? 
-                        <Button
-                            primary
-                            as={Link}
-                            to={{ pathname: `/goals/${recordingObject.id}/create` }}
-                            label="Add Goal"
-                            margin="small"
+                    {relatedExcerpt.created_by_current_user
+                        ? (
+                            <>
+                                <Button
+                                    primary
+                                    as={Link}
+                                    onClick={() => deleteRecording(recordingObject.id).then(toggleFunction)}
+                                    label="Delete Recording"
+                                    margin="small"
+                                />
+                                <Button
+                                    primary
+                                    as={Link}
+                                    to={{ pathname: `/goals/${recordingObject.id}/create` }}
+                                    label="Add Goal"
+                                    margin="small"
 
-                        />
+                                />
+
+                            </>
+                        )
                         :
                         <Button
                             primary
                             as={Link}
-                            to={{pathname: `/comments/${recordingObject.id}/create`}}
+                            to={{ pathname: `/comments/${recordingObject.id}/create` }}
                             label="Add Comment"
                             margin="small"
                         />
                     }
 
 
-                    
+
 
                     <Box margin="medium">
 

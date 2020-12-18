@@ -6,7 +6,7 @@ import { Box, Button, Heading, Layer, Text } from "grommet"
 import { Trash } from "grommet-icons"
 
 
-export const DeleteGoal = ({ open, onClose, goalId }) => {
+export const DeleteGoal = ({ open, onClose, goalId, relatedExcerpt, func }) => {
   const { deleteGoal } = useContext(GoalContext);
   const history = useHistory()
 
@@ -15,9 +15,11 @@ export const DeleteGoal = ({ open, onClose, goalId }) => {
   //Lastly the function calls the close function which resets our modal state.
   const deleteThisGoal = () => {
     deleteGoal(goalId)
+    .then(onClose)
     .then(() => {
-      history.push("/home")
+      history.push(`/excerpts/${relatedExcerpt.id}`)
     })
+    .then(func)
   };
 
   return (

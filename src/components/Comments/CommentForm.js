@@ -2,14 +2,19 @@
 import React, { useEffect, useContext, useState } from "react";
 import { CommentContext } from "../Comments/CommentProvider"
 import { Button, Box, Text, TextInput, Heading, Layer, Select, FormField, Form } from "grommet"
+import { RecordingContext } from "../Recordings/RecordingProvider"
 
 
 export const CommentForm = (props) => {
     const { createComment, editComment, getCommentById } = useContext(CommentContext)
 
+    const { getRecordingById } = useContext(RecordingContext)
+
     const editMode = props.match.url.split("/")[1] === "editcomment" //checks url to see if editMode
 
     const [currentComment, setCurrentComment] = useState({})
+
+    const [recording, setRecording] = useState({excerpt:{musician:{}}})
 
     //state variable and functions that change state of the state variable
     const [open, setOpen] = useState();
@@ -20,20 +25,28 @@ export const CommentForm = (props) => {
 
     const recordingId = props.match.params.recordingId
 
+    
+
 
     useEffect(() => {
-        if (editMode) {
-            getCommentById(parseInt(props.match.params.commentId))
-                .then(comment => {
-                    setCurrentComment({
-                        recording: comment.recording,
-                        content: comment.content,
-                        author: comment.author,
-                        date: comment.date
-                    })
-                })
-                console.log(currentComment)
-        }
+
+        getRecordingById(parseInt(props.match.params.recordingId))
+            .then(setRecording)
+            .then(() => {
+                if (editMode) {
+                    getCommentById(parseInt(props.match.params.commentId))
+                        .then(comment => {
+                            setCurrentComment({
+                                recording: comment.recording,
+                                content: comment.content,
+                                author: comment.author,
+                                date: comment.date
+                            })
+                        })
+                        
+                }
+            })
+        console.log(recording)
 
     }, [])
 
@@ -82,7 +95,7 @@ export const CommentForm = (props) => {
                                     recording: parseInt(recordingId)
 
                                 }).then(() => {
-                                    props.history.push("/home")
+                                    props.history.push(`/profiles/${recording.excerpt.musician.id}`)
                                 })
                             }}
                                 margin="small"
@@ -104,7 +117,7 @@ export const CommentForm = (props) => {
                             content: currentComment.content,
                             recording: parseInt(recordingId)
                         })
-                            .then(() => props.history.push("/home"))
+                            .then(() => props.history.push(`/profiles/${recording.excerpt.musician.id}`))
                     }}
 
                 />

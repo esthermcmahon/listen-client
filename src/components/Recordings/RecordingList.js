@@ -10,11 +10,17 @@ export const RecordingList = (props) => {
   const [recordings, setRecordings] = useState([])
   const excerptId = props.match.params.excerptId
 
+  const [change, setChange] = useState(false)
+
+  const func = () => {
+    change ? setChange(false) : setChange(true)
+
+}
   //gets the recordings from the database
   useEffect(() => {
     getRecordingByExcerpt(excerptId)
     .then(setRecordings);
-  }, []);
+  }, [change]);
 
 
   return (
@@ -28,7 +34,7 @@ export const RecordingList = (props) => {
 
           {recordings.map((recordingObject) => {
             return (
-              <Recording recordingId = {recordingObject.id} {...props} excerptId={excerptId}/>
+              <Recording recordingId = {recordingObject.id} excerptId={excerptId} func={func} {...props}/>
             );
           })}
         </Box>

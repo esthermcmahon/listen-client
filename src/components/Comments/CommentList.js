@@ -21,15 +21,21 @@ export const CommentList = (props) => {
 
     const [comments, setComments] = useState([])
 
+    const [change, setChange] = useState(false)
+
     const relatedExcerpt = props.relatedExcerpt
+
+    const func = () => {
+        change ? setChange(false) : setChange(true)
+
+    }
 
     //get the comments for this recording from the database
     useEffect(() => {
         getCommentByRecording(props.recordingId)
             .then(setComments)
-    
-        
-    }, [])
+
+    }, [change])
 
 
 
@@ -46,14 +52,24 @@ export const CommentList = (props) => {
                                 <Text>{comment.date}</Text>
                                 <Text>{comment.author.user.first_name} {comment.author.user.last_name}</Text>
 
-                                {comment.created_by_current_user ?
-                                    <Button
-                                        primary
-                                        as={Link}
-                                        to={{ pathname: `/editcomment/${comment.id}/${props.recordingId}` }}
-                                        label="EDIT"
-                                        margin="small"
-                                    />
+                                {comment.created_by_current_user ? (
+                                    <>
+                                        <Button
+                                            primary
+                                            as={Link}
+                                            to={{ pathname: `/editcomment/${comment.id}/${props.recordingId}` }}
+                                            label="EDIT"
+                                            margin="small"
+                                        />
+                                        <Button
+                                            primary
+                                            as={Link}
+                                            onClick={() => deleteComment(comment.id).then(func)}
+                                            label="DELETE"
+                                            margin="small"
+                                        />
+                                    </>
+                                )
                                     : ""}
                             </>
                         )
