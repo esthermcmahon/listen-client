@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ExcerptContext } from "./ExcerptProvider"
-import { Excerpt } from "./Excerpt"
+import { Link } from "react-router-dom"
 import { MusicianContext } from "../Musicians/MusicianProvider"
 import {
     Anchor,
@@ -13,7 +13,7 @@ import {
     CardHeader,
     Heading,
     Text,
-  } from "grommet";
+} from "grommet";
 
 
 export const CompletedExcerpts = (props) => {
@@ -53,16 +53,24 @@ export const CompletedExcerpts = (props) => {
                                     pad="xsmall"
                                     width="medium"
                                 >
-                                    
-                                        <CardHeader>
-                                            <Text weight="bold">{excerpt.name}</Text>
-                                        </CardHeader>
-                                        <Button
-                                            primary
-                                            onClick={() => undone(excerpt.id).then(func)}
-                                            label="Add to Dashboard"
-                                            margin="small"
-                                />
+
+                                    <CardHeader>
+                                        <Anchor
+                                            color="brand"
+                                            as={Link}
+                                            to={{ pathname: `/excerpts/${excerpt.id}` }}
+                                        >
+                                            <CardHeader>
+                                                <Text weight="bold">{excerpt.name}</Text>
+                                            </CardHeader>
+                                        </Anchor>
+                                    </CardHeader>
+                                    <Button
+                                        primary
+                                        onClick={() => undone(excerpt.id).then(func)}
+                                        label="Add to Dashboard"
+                                        margin="small"
+                                    />
 
                                 </Card>
                             </Box>
