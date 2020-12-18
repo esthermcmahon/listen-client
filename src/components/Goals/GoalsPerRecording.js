@@ -8,9 +8,16 @@ import { Edit, More, Trash } from "grommet-icons";
 import { DeleteGoal } from "./DeleteGoal"
 
 export const GoalsPerRecording = (props) => {
-    const { getGoalByRecording } = useContext(GoalContext);
+    const { getGoalByRecording, deleteGoal } = useContext(GoalContext);
 
     const [goals, setGoals] = useState([])
+
+    const [change, setChange] = useState(false)
+
+    const func = () => {
+        change ? setChange(false) : setChange(true)
+
+    }
 
     const [open, setOpen] = useState();
     const onOpen = () => setOpen(true);
@@ -22,7 +29,7 @@ export const GoalsPerRecording = (props) => {
     useEffect(() => {
         getGoalByRecording(props.recordingId)
             .then(setGoals);
-    }, []);
+    }, [change]);
 
 
     return (
@@ -34,7 +41,7 @@ export const GoalsPerRecording = (props) => {
                     {goals.map((goal) => {
                         return (
                             <>
-                                <DeleteGoal open={open} onClose={onClose} goalId={goal.id} />
+                                <DeleteGoal open={open} onClose={onClose} goalId={goal.id} relatedExcerpt={relatedExcerpt} func={func}/>
                                 <Box key={goal.id} width="medium">
                                     <Card className="container__cardContent" margin="small">
                                         <Heading level="3">{goal.category.label}</Heading>
@@ -64,6 +71,7 @@ export const GoalsPerRecording = (props) => {
                                                                 </Box>
                                                             ),
                                                             onClick: () => onOpen(),
+                                                            // onClick: () => deleteGoal(goal.id).then(func)
                                                         },
                                                     ]}
                                                 />

@@ -26,7 +26,7 @@ export const CommentList = (props) => {
     const relatedExcerpt = props.relatedExcerpt
 
     const func = () => {
-        change? setChange(false) : setChange(true)
+        change ? setChange(false) : setChange(true)
 
     }
 
@@ -34,7 +34,7 @@ export const CommentList = (props) => {
     useEffect(() => {
         getCommentByRecording(props.recordingId)
             .then(setComments)
-    
+
     }, [change])
 
 
@@ -54,20 +54,20 @@ export const CommentList = (props) => {
 
                                 {comment.created_by_current_user ? (
                                     <>
-                                    <Button
-                                        primary
-                                        as={Link}
-                                        to={{ pathname: `/editcomment/${comment.id}/${props.recordingId}` }}
-                                        label="EDIT"
-                                        margin="small"
-                                    />
-                                    <Button
-                                        primary
-                                        as={Link}
-                                        onClick={() => deleteComment(comment.id).then(func)}
-                                        label="DELETE"
-                                        margin="small"
-                                    />
+                                        <Button
+                                            primary
+                                            as={Link}
+                                            to={{ pathname: `/editcomment/${comment.id}/${props.recordingId}` }}
+                                            label="EDIT"
+                                            margin="small"
+                                        />
+                                        <Button
+                                            primary
+                                            as={Link}
+                                            onClick={() => deleteComment(comment.id).then(func)}
+                                            label="DELETE"
+                                            margin="small"
+                                        />
                                     </>
                                 )
                                     : ""}
