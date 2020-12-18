@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { CommentContext } from "./CommentProvider"
+import { Link } from "react-router-dom"
 import { MusicianContext } from "../Musicians/MusicianProvider"
 import {
     Anchor,
@@ -12,6 +13,7 @@ import {
     Heading,
     Text,
 } from "grommet";
+import { get } from "http";
 
 export const CommentList = (props) => {
     const { deleteComment, getCommentByRecording } = useContext(CommentContext)
@@ -25,6 +27,8 @@ export const CommentList = (props) => {
     useEffect(() => {
         getCommentByRecording(props.recordingId)
             .then(setComments)
+    
+        
     }, [])
 
 
@@ -32,7 +36,7 @@ export const CommentList = (props) => {
 
     return (
         <Box>
-            <Heading>Comments</Heading>
+            <Heading level="3">Comments</Heading>
             <Box>
                 {
                     comments.map((comment) => {
@@ -41,13 +45,21 @@ export const CommentList = (props) => {
                                 <Text>{comment.content}</Text>
                                 <Text>{comment.date}</Text>
                                 <Text>{comment.author.user.first_name} {comment.author.user.last_name}</Text>
+
+                                {comment.created_by_current_user ?
+                                    <Button
+                                        primary
+                                        as={Link}
+                                        to={{ pathname: `/editcomment/${comment.id}/${props.recordingId}` }}
+                                        label="EDIT"
+                                        margin="small"
+                                    />
+                                    : ""}
                             </>
                         )
                     })
                 }
-                {relatedExcerpt.created_by_current_user ? "" :
-                    <Button>Add a comment</Button>
-                }
+
             </Box>
 
         </Box>

@@ -35,6 +35,8 @@ export const Recording = (props) => {
 
         getExcerptById(excerptId)
             .then(setRelatedExcerpt)
+
+        
     }, [])
 
 
@@ -47,8 +49,8 @@ export const Recording = (props) => {
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
-                    {relatedExcerpt.created_by_current_user
-                        ?
+                    {relatedExcerpt.created_by_current_user 
+                        ? 
                         <Button
                             primary
                             as={Link}
@@ -57,15 +59,23 @@ export const Recording = (props) => {
                             margin="small"
 
                         />
-                        : ""
-
-
+                        :
+                        <Button
+                            primary
+                            as={Link}
+                            to={{pathname: `/comments/${recordingObject.id}/create`}}
+                            label="Add Comment"
+                            margin="small"
+                        />
                     }
+
+
+                    
 
                     <Box margin="medium">
 
-                        <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt = {relatedExcerpt} />
-                        <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt = {relatedExcerpt} />
+                        <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
+                        <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
 
                     </Box>
                 </Box>

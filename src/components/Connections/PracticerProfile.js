@@ -20,7 +20,7 @@ export const PracticerProfile = (props) => {
 
   return (
       <>
-      <Heading>{practicer.user.username}</Heading>
+      <Heading>{practicer.user.username}'s profile</Heading>
       <PracticerExcerptList practicerId={practicerId}/>
       </>
   )
