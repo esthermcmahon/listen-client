@@ -35,7 +35,7 @@ export const Excerpt = (props) => {
     setChecked(event.target.checked)
     done(excerpt.id)
     props.func()
-}
+  }
 
 
 
@@ -57,10 +57,13 @@ export const Excerpt = (props) => {
             <Text weight="bold">{excerpt.name}</Text>
           </CardHeader>
         </Anchor>
-        <CheckBox
-          checked={checked}
-          onChange={handleChange}
-        />
+        {excerpt.created_by_current_user ?
+          <CheckBox
+            checked={checked}
+            onChange={handleChange}
+          /> : ""
+        }
+
 
       </Card>
     </Box>
