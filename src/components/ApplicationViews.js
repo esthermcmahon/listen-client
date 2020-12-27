@@ -1,4 +1,4 @@
-//renders each imported component depending on the URl path 
+//MVP renders each imported component depending on the URl path 
 import React from "react";
 import { Route } from "react-router-dom";
 import { CategoryProvider } from "./Categories/CategoryProvider"

@@ -43,7 +43,6 @@ export const CompletedExcerpts = (props) => {
 
                 {
                     filteredExcerpts.map(excerpt => {
-
                         return excerpt.done === true ?
                             <Box key={excerpt.id} width="medium">
                                 <Card
