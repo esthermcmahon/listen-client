@@ -1,5 +1,5 @@
 //Form to let user create a new goal
-import React, { useEffect, useContext, useState} from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { GoalContext } from "./GoalProvider";
 import { CategoryContext } from "../Categories/CategoryProvider"
 import { Button, Box, Text, TextInput, Heading, Layer, Select, FormField, Form } from "grommet"
@@ -7,12 +7,14 @@ import { Button, Box, Text, TextInput, Heading, Layer, Select, FormField, Form }
 
 export const GoalForm = (props) => {
   const { getGoals, createGoal, editGoal, getGoalById, getGoalByRecording } = useContext(GoalContext)
-  const { categories, getCategories} = useContext(CategoryContext)
+  const { categories, getCategories } = useContext(CategoryContext)
 
   const editMode = props.match.url.split("/")[1] === "editgoal" //checks url to see if editMode
 
   const [currentGoal, setCurrentGoal] = useState({})
- 
+
+  const [category, setCategory] = useState("")
+
   //state variable and functions that change state of the state variable
   const [open, setOpen] = useState();
   const onOpen = () => setOpen(true);
@@ -24,24 +26,25 @@ export const GoalForm = (props) => {
 
 
   useEffect(() => {
-      getCategories()
-        .then(() => {
-            if (editMode) {
-                getGoalById(parseInt(props.match.params.goalId))
-                    .then(goal => {
-                        setCurrentGoal({
-                            recording: goal.recording,
-                            category_id: goal.category.id,
-                            goal: goal.goal,
-                            action: goal.action
-                        })
-                    })
-            }
-        })
+    getCategories()
+      .then(() => {
+        if (editMode) {
+          getGoalById(parseInt(props.match.params.goalId))
+            .then(goal => {
+              setCurrentGoal({
+                recording: goal.recording,
+                category_id: goal.category.id,
+                goal: goal.goal,
+                action: goal.action
+              })
+            })
+        }
+      })
 
-        console.log(props)
+    
   }, [])
 
+  console.log(category)
   //function that is called when a change happens in the form. It sets the state variable that is imported via context.
   //whatever the value that goes in the input (the evt) is being written as single property object with a key of 'type'
   //and the value of the form input
@@ -49,65 +52,75 @@ export const GoalForm = (props) => {
     const newGoalState = Object.assign({}, currentGoal)
     newGoalState[event.target.name] = event.target.value
     setCurrentGoal(newGoalState)
-    
+
   }
+
+  //separate state for category, instead of handleChange
 
   return (
 
     <Box align="center" alignContent="center">
+      <Heading level="2" className="goal">Category: </Heading>
+      <Box margin="small">
+        {/* <FormField>
+          <div className="form-group">
+            <select name="category_id" className="form-control"
+              value={currentGoal.category_id}
+              onChange={handleChange}>
+
+              <option value="0">Choose a category</option>
+              {categories.map(category => (
+                <option key={category.id} value={category.id} name={currentGoal.category}>
+                  {category.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </FormField> */}
+
+        <Select
+          name="category"
+          options={categories.map(category=> category.label)}
+          value={categories.id}
+          onChange={(category) => {setCategory(categories.find(c => c.label === category.id).id)}}>
+
+        </Select>
+
+      </Box>
       <Box htmlFor="goal">
         <Heading level="2" className="goal">Enter goal:</Heading>
         <Box margin="small">
-        <TextInput
-          type="text"
-          name="goal"
-          value={currentGoal.goal}
-          onChange={handleChange}
-        />
+          <TextInput
+            type="text"
+            name="goal"
+            value={currentGoal.goal}
+            onChange={handleChange}
+          />
         </Box>
-      
+
         <Heading level="2" className="goal">Enter action:</Heading>
         <Box margin="small">
-        <TextInput
-        type="text"
-        name="action"
-        value={currentGoal.action}
-        onChange={handleChange}
-        />
+          <TextInput
+            type="text"
+            name="action"
+            value={currentGoal.action}
+            onChange={handleChange}
+          />
         </Box>
-        <Heading level="2" className="goal">Category: </Heading>
-        <Box margin="small">
-            <FormField>
-                <div className="form-group">
-                    <select name="category_id" className="form-control"
-                        value={currentGoal.category_id}
-                        onChange={handleChange}>
 
-                        <option value="0">Choose a category</option>
-                        {categories.map(category => (
-                            <option key={category.id} value={category.id} name={currentGoal.category}>
-                                {category.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </FormField>
-            
-           
-        </Box>
-        
-        
-        
-        
-      {editMode ? <Button primary margin="small" label="EDIT" className="edit_goal" onClick={onOpen}/> : ""}
+
+
+
+
+        {editMode ? <Button primary margin="small" label="EDIT" className="edit_goal" onClick={onOpen} /> : ""}
       </Box>
 
       {open && (
 
         <Layer onEsc={onClose}
-        onClickOutside={onClose}
-        responsive={true}
-        position="center"
+          onClickOutside={onClose}
+          responsive={true}
+          position="center"
         >
           <Box width="medium" size="small" margin="small">
             <Heading level="3">Confirm</Heading>
@@ -126,10 +139,10 @@ export const GoalForm = (props) => {
                   props.history.goBack()
                 })
               }}
-              margin="small"
+                margin="small"
               />
-           
-              <Button margin="small" secondary label="Cancel" onClick={onClose}/>
+
+              <Button margin="small" secondary label="Cancel" onClick={onClose} />
             </Box>
           </Box>
         </Layer>
@@ -137,7 +150,7 @@ export const GoalForm = (props) => {
 
       )}
       {editMode ? "" :
-        <Button primary label = "Create New Goal"
+        <Button primary label="Create New Goal"
           type="submit"
           onClick={(evt) => {
             evt.preventDefault()
@@ -149,12 +162,12 @@ export const GoalForm = (props) => {
             })
               .then(() => props.history.goBack())
           }}
-         
+
         />
       }
     </Box>
 
-  
+
 
   )
 };
@@ -167,12 +180,12 @@ export const GoalForm = (props) => {
 //     currentGoal[event.target.name] = event.target.value
 //     console.log(currentGoal)
 //     setCurrentGoal(currentGoal)
-    
+
 //   }
-            
+
 //if refactoring with grommet
-            
-            {/* <FormField>
+
+{/* <FormField>
               <Select
                 id={categories.id}
                 name="category_id"
@@ -186,7 +199,7 @@ export const GoalForm = (props) => {
               />
 
             </FormField>  */}
-          
+
 //   useEffect(() => {
 //     if (editMode) {
 //         getCategories()
