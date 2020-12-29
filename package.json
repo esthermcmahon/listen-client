@@ -12,6 +12,7 @@
     "grommet-styles": "^0.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-media-recorder": "^1.4.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-voice-recorder": "^2.0.2",

@@ -1,5 +1,6 @@
 import { Recorder } from 'react-voice-recorder'
 import 'react-voice-recorder/dist/index.css'
+import { useReactMediaRecorder } from "react-media-recorder";
 import { RecordingContext } from "./RecordingProvider"
 import React, { useContext, useState, useEffect } from "react"
 import {
@@ -51,11 +52,14 @@ export const NewRecording = (props) => {
     var reader = new FileReader()
 
     reader.readAsDataURL(recorderState.blob)
+    // reader.readAsDataURL(blob)
     reader.onloadend = function () {
       var base64data = reader.result
-      // console.log(base64data)
+
       const data = new FormData()
       data.append('file', base64data)
+      // console.log(newURL)
+      // data.append('file', newURL)
       data.append('upload_preset', 'zv6murma')
       data.append('resource_type', 'video')
       fetch("https://api.cloudinary.com/v1_1/dkicrisrl/upload", {
@@ -70,7 +74,7 @@ export const NewRecording = (props) => {
         .then(res => {
           const audioresult = res
           setAudio(audioresult.secure_url)
-        })   
+        })
 
     }
   }
@@ -89,9 +93,9 @@ export const NewRecording = (props) => {
   const handleAudioStop = (data) => {
     console.log(data)
     setRecorderState(data)
-    
+
   }
-  
+
   const handleAudioUpload = () => {
     uploadAudio()
   }
@@ -110,7 +114,14 @@ export const NewRecording = (props) => {
     setRecorderState(reset)
   }
 
+  const {
+    status,
+    startRecording,
+    stopRecording,
+    mediaBlobUrl,
+  } = useReactMediaRecorder({ audio: true });
 
+ 
   return (
     <>
       <Recorder
@@ -123,6 +134,13 @@ export const NewRecording = (props) => {
         handleRest={() => handleReset()}
 
       />
+
+      {/* <div>
+        <p>{status}</p>
+        <button onClick={startRecording}>Start Recording</button>
+        <button onClick={stopRecording}>Stop Recording</button>
+        <audio src={mediaBlobUrl} controls autoplay />
+      </div> */}
 
 
       <Box>
@@ -144,6 +162,7 @@ export const NewRecording = (props) => {
         primary
         label="Save"
         onClick={(evt) => {
+          uploadAudio()
           constructNewRecording(evt)
             ;
         }}
