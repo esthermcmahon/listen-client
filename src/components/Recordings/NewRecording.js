@@ -27,6 +27,8 @@ export const NewRecording = (props) => {
     getRecordings()
   }, [])
 
+
+
   const handleChange = (event) => {
     const newRecordingState = Object.assign({}, currentRecording)
     newRecordingState[event.target.name] = event.target.value
@@ -34,11 +36,11 @@ export const NewRecording = (props) => {
   }
   const jsonDate = new Date(Date.now()).toJSON().slice(0, 10);
 
-  const constructNewRecording = () => {
+  const constructNewRecording = (secureUrl) => {
     const newRecording = {
       label: currentRecording.label,
       excerpt: excerptId,
-      audio: audio,
+      audio: secureUrl,
       date: jsonDate
 
     }
@@ -48,20 +50,21 @@ export const NewRecording = (props) => {
   }
 
 
-  const uploadAudio = () => {
+
+  const uploadAudio = async () => {
     var reader = new FileReader()
 
-    reader.readAsDataURL(recorderState.blob)
-    // reader.readAsDataURL(blob)
+    const audioBlob = await fetch(mediaBlobUrl)
+      .then(r => r.blob())
+    reader.readAsDataURL(audioBlob)
+
     reader.onloadend = function () {
       var base64data = reader.result
-
       const data = new FormData()
       data.append('file', base64data)
-      // console.log(newURL)
-      // data.append('file', newURL)
       data.append('upload_preset', 'zv6murma')
       data.append('resource_type', 'video')
+
       fetch("https://api.cloudinary.com/v1_1/dkicrisrl/upload", {
         method: "POST",
         headers: {
@@ -73,58 +76,62 @@ export const NewRecording = (props) => {
         .then(res => res.json())
         .then(res => {
           const audioresult = res
-          setAudio(audioresult.secure_url)
+          // setAudio(audioresult.secure_url)
+
+          constructNewRecording(audioresult.secure_url)
         })
 
     }
   }
 
-  const [recorderState, setRecorderState] = useState({
-    url: null,
-    blob: null,
-    chunks: null,
-    duration: {
-      h: 0,
-      m: 0,
-      s: 0
-    }
-  })
+  // const [recorderState, setRecorderState] = useState({
+  //   url: null,
+  //   blob: null,
+  //   chunks: null,
+  //   duration: {
+  //     h: 0,
+  //     m: 0,
+  //     s: 0
+  //   }
+  // })
 
-  const handleAudioStop = (data) => {
-    console.log(data)
-    setRecorderState(data)
+  // const handleAudioStop = (data) => {
+  //   console.log(data)
+  //   setRecorderState(data)
 
-  }
+  // }
 
-  const handleAudioUpload = () => {
-    uploadAudio()
-  }
+  // const handleAudioUpload = () => {
+  //   uploadAudio()
+  // }
 
-  const handleReset = () => {
-    const reset = {
-      url: null,
-      blob: null,
-      chunks: null,
-      duration: {
-        h: 0,
-        m: 0,
-        s: 0
-      }
-    };
-    setRecorderState(reset)
-  }
+  // const handleReset = () => {
+  //   const reset = {
+  //     url: null,
+  //     blob: null,
+  //     chunks: null,
+  //     duration: {
+  //       h: 0,
+  //       m: 0,
+  //       s: 0
+  //     }
+  //   };
+  //   setRecorderState(reset)
+  // }
 
   const {
     status,
     startRecording,
     stopRecording,
-    mediaBlobUrl,
-  } = useReactMediaRecorder({ audio: true });
+    mediaBlobUrl
+  } = useReactMediaRecorder({
+    audio: true
+  });
 
- 
+
   return (
     <>
-      <Recorder
+      {/* <Recorder
         record={true}
         title={"New recording"}
         audioURL={recorderState.url}
@@ -133,14 +140,14 @@ export const NewRecording = (props) => {
         handleAudioUpload={data => handleAudioUpload(data)}
         handleRest={() => handleReset()}
 
-      />
+      /> */}
 
-      {/* <div>
+      <div>
         <p>{status}</p>
         <button onClick={startRecording}>Start Recording</button>
         <button onClick={stopRecording}>Stop Recording</button>
         <audio src={mediaBlobUrl} controls autoplay />
-      </div> */}
+      </div>
 
 
       <Box>
@@ -161,9 +168,9 @@ export const NewRecording = (props) => {
         fill={false}
         primary
         label="Save"
-        onClick={(evt) => {
+        onClick={() => {
           uploadAudio()
-          constructNewRecording(evt)
+         
             ;
         }}
       />
