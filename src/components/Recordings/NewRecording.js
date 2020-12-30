@@ -1,5 +1,6 @@
 import { Recorder } from 'react-voice-recorder'
 import 'react-voice-recorder/dist/index.css'
+import { useReactMediaRecorder } from "react-media-recorder";
 import { RecordingContext } from "./RecordingProvider"
 import React, { useContext, useState, useEffect } from "react"
 import {
@@ -19,12 +20,13 @@ export const NewRecording = (props) => {
   const [currentRecording, setCurrentRecording] = useState({})
   const excerptId = props.match.params.excerptId
 
-  const [audio, setAudio] = useState('')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getRecordings()
   }, [])
+
+
 
   const handleChange = (event) => {
     const newRecordingState = Object.assign({}, currentRecording)
@@ -33,11 +35,11 @@ export const NewRecording = (props) => {
   }
   const jsonDate = new Date(Date.now()).toJSON().slice(0, 10);
 
-  const constructNewRecording = () => {
+  const constructNewRecording = (secureUrl) => {
     const newRecording = {
       label: currentRecording.label,
       excerpt: excerptId,
-      audio: audio,
+      audio: secureUrl,
       date: jsonDate
 
     }
@@ -47,17 +49,21 @@ export const NewRecording = (props) => {
   }
 
 
-  const uploadAudio = () => {
+
+  const uploadAudio = async () => {
     var reader = new FileReader()
 
-    reader.readAsDataURL(recorderState.blob)
+    const audioBlob = await fetch(mediaBlobUrl)
+      .then(r => r.blob())
+    reader.readAsDataURL(audioBlob)
+
     reader.onloadend = function () {
       var base64data = reader.result
-      // console.log(base64data)
       const data = new FormData()
       data.append('file', base64data)
       data.append('upload_preset', 'zv6murma')
       data.append('resource_type', 'video')
+
       fetch("https://api.cloudinary.com/v1_1/dkicrisrl/upload", {
         method: "POST",
         headers: {
@@ -69,60 +75,32 @@ export const NewRecording = (props) => {
         .then(res => res.json())
         .then(res => {
           const audioresult = res
-          setAudio(audioresult.secure_url)
-        })   
+          constructNewRecording(audioresult.secure_url)
+        })
 
     }
   }
 
-  const [recorderState, setRecorderState] = useState({
-    url: null,
-    blob: null,
-    chunks: null,
-    duration: {
-      h: 0,
-      m: 0,
-      s: 0
-    }
-  })
 
-  const handleAudioStop = (data) => {
-    console.log(data)
-    setRecorderState(data)
-    
-  }
-  
-  const handleAudioUpload = () => {
-    uploadAudio()
-  }
 
-  const handleReset = () => {
-    const reset = {
-      url: null,
-      blob: null,
-      chunks: null,
-      duration: {
-        h: 0,
-        m: 0,
-        s: 0
-      }
-    };
-    setRecorderState(reset)
-  }
+  const {
+    status,
+    startRecording,
+    stopRecording,
+    mediaBlobUrl
+  } = useReactMediaRecorder({
+    audio: true
+  });
 
 
   return (
     <>
-      <Recorder
-        record={true}
-        title={"New recording"}
-        audioURL={recorderState.url}
-        showUIAudio
-        handleAudioStop={data => handleAudioStop(data)}
-        handleAudioUpload={data => handleAudioUpload(data)}
-        handleRest={() => handleReset()}
-
-      />
+      <div>
+        <Text>{status}!</Text>
+        <Button primary margin="medium" padding="large" onClick={startRecording}>Start Recording</Button>
+        <Button primary onClick={stopRecording}>Stop Recording</Button>
+        <audio src={mediaBlobUrl} controls autoplay />
+      </div>
 
 
       <Box>
@@ -143,8 +121,9 @@ export const NewRecording = (props) => {
         fill={false}
         primary
         label="Save"
-        onClick={(evt) => {
-          constructNewRecording(evt)
+        onClick={() => {
+          uploadAudio()
+         
             ;
         }}
       />
