@@ -20,7 +20,6 @@ export const NewRecording = (props) => {
   const [currentRecording, setCurrentRecording] = useState({})
   const excerptId = props.match.params.excerptId
 
-  const [audio, setAudio] = useState('')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -76,48 +75,13 @@ export const NewRecording = (props) => {
         .then(res => res.json())
         .then(res => {
           const audioresult = res
-          // setAudio(audioresult.secure_url)
-
           constructNewRecording(audioresult.secure_url)
         })
 
     }
   }
 
-  // const [recorderState, setRecorderState] = useState({
-  //   url: null,
-  //   blob: null,
-  //   chunks: null,
-  //   duration: {
-  //     h: 0,
-  //     m: 0,
-  //     s: 0
-  //   }
-  // })
 
-  // const handleAudioStop = (data) => {
-  //   console.log(data)
-  //   setRecorderState(data)
-
-  // }
-
-  // const handleAudioUpload = () => {
-  //   uploadAudio()
-  // }
-
-  // const handleReset = () => {
-  //   const reset = {
-  //     url: null,
-  //     blob: null,
-  //     chunks: null,
-  //     duration: {
-  //       h: 0,
-  //       m: 0,
-  //       s: 0
-  //     }
-  //   };
-  //   setRecorderState(reset)
-  // }
 
   const {
     status,
@@ -131,21 +95,10 @@ export const NewRecording = (props) => {
 
   return (
     <>
-      {/* <Recorder
-        record={true}
-        title={"New recording"}
-        audioURL={recorderState.url}
-        showUIAudio
-        handleAudioStop={data => handleAudioStop(data)}
-        handleAudioUpload={data => handleAudioUpload(data)}
-        handleRest={() => handleReset()}
-
-      /> */}
-
       <div>
-        <p>{status}</p>
-        <button onClick={startRecording}>Start Recording</button>
-        <button onClick={stopRecording}>Stop Recording</button>
+        <Text>{status}!</Text>
+        <Button primary margin="medium" padding="large" onClick={startRecording}>Start Recording</Button>
+        <Button primary onClick={stopRecording}>Stop Recording</Button>
         <audio src={mediaBlobUrl} controls autoplay />
       </div>
 

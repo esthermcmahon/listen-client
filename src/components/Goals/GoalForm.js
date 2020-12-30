@@ -62,7 +62,7 @@ export const GoalForm = (props) => {
     <Box align="center" alignContent="center">
       <Heading level="2" className="goal">Category: </Heading>
       <Box margin="small">
-        {/* <FormField>
+        <FormField>
           <div className="form-group">
             <select name="category_id" className="form-control"
               value={currentGoal.category_id}
@@ -76,15 +76,15 @@ export const GoalForm = (props) => {
               ))}
             </select>
           </div>
-        </FormField> */}
+        </FormField>
 
-        <Select
+        {/* <Select
           name="category"
           options={categories.map(category=> category.label)}
           value={categories.id}
           onChange={(category) => {setCategory(categories.find(c => c.label === category.id).id)}}>
 
-        </Select>
+        </Select> */}
 
       </Box>
       <Box htmlFor="goal">
