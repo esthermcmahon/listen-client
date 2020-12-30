@@ -9,7 +9,7 @@ import {
   TextInput,
   Text
 } from "grommet"
-
+import "./RecordingAnimation.css"
 
 
 export const NewRecording = (props) => {
@@ -93,12 +93,31 @@ export const NewRecording = (props) => {
   });
 
 
+
   return (
+
     <>
-      <div>
-        <Text>{status}!</Text>
-        <Button primary margin="medium" padding="large" onClick={startRecording}>Start Recording</Button>
-        <Button primary onClick={stopRecording}>Stop Recording</Button>
+      <Button primary margin="medium" padding="large" onClick={startRecording}>Start Recording</Button>
+      <Button primary onClick={stopRecording}>Stop Recording</Button>
+      <div class="animation">
+        {status === 'recording' ?
+
+          <div class="loader-container">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+            <div class="rectangle-5"></div>
+            <div class="rectangle-6"></div>
+            <div class="rectangle-5"></div>
+            <div class="rectangle-4"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-1"></div>
+          </div>
+
+          : ""}
+
         <audio src={mediaBlobUrl} controls autoplay />
       </div>
 
@@ -123,7 +142,7 @@ export const NewRecording = (props) => {
         label="Save"
         onClick={() => {
           uploadAudio()
-         
+
             ;
         }}
       />
