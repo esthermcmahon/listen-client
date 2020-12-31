@@ -3,6 +3,7 @@ import 'react-voice-recorder/dist/index.css'
 import { useReactMediaRecorder } from "react-media-recorder";
 import { RecordingContext } from "./RecordingProvider"
 import React, { useContext, useState, useEffect } from "react"
+import { Microphone, StopFill } from "grommet-icons"
 import {
   Box,
   Button,
@@ -97,12 +98,12 @@ export const NewRecording = (props) => {
   return (
 
     <>
-      <Button primary margin="medium" padding="large" onClick={startRecording}>Start Recording</Button>
-      <Button primary onClick={stopRecording}>Stop Recording</Button>
-      <div class="animation">
+      <Button primary margin="medium" pad="large" onClick={startRecording} label="Record" icon={<Microphone/>}></Button>
+      <Button primary onClick={stopRecording} label="Stop" icon={<StopFill />}></Button>
+      <Box class="animation" gap="large">
         {status === 'recording' ?
 
-          <div class="loader-container">
+          <div margin="10px" class="loader-container">
             <div class="rectangle-1"></div>
             <div class="rectangle-2"></div>
             <div class="rectangle-3"></div>
@@ -117,9 +118,11 @@ export const NewRecording = (props) => {
           </div>
 
           : ""}
+          <Box margin="large">
 
         <audio src={mediaBlobUrl} controls autoplay />
-      </div>
+        </Box>
+      </Box >
 
 
       <Box>
