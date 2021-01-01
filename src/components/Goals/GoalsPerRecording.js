@@ -43,7 +43,7 @@ export const GoalsPerRecording = (props) => {
                             <>
                                 <DeleteGoal open={open} onClose={onClose} goalId={goal.id} relatedExcerpt={relatedExcerpt} func={func}/>
                                 <Box key={goal.id} width="medium">
-                                    <Card className="container__cardContent" margin="small">
+                                    <Card className="container__cardContent" margin="small" pad="medium" background="#CCE1CE">
                                         <Heading level="3">{goal.category.label}</Heading>
                                         <Text>Goal: {goal.goal}</Text>
                                         <Text>Action: {goal.action}</Text>

@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { GoalsPerRecording } from "../Goals/GoalsPerRecording"
 import { RecordingContext } from "./RecordingProvider"
+import { Trash, Add } from "grommet-icons"
 import {
     Anchor,
     Box,
@@ -49,7 +50,7 @@ export const Recording = (props) => {
 
             <Box>
                 <Box margin="medium">
-                    <Heading level="3" >{recordingObject.label}</Heading>
+                    <Heading level="4" >{recordingObject.label}</Heading>
                     <Text>{recordingObject.date}</Text>
 
                     <audio src={recordingObject.audio} controls />
@@ -60,14 +61,15 @@ export const Recording = (props) => {
                                     primary
                                     as={Link}
                                     onClick={() => deleteRecording(recordingObject.id).then(toggleFunction)}
-                                    label="Delete Recording"
+                                    icon={<Trash/>}
                                     margin="small"
                                 />
+                                <Heading level="3">Goals</Heading>
                                 <Button
                                     primary
                                     as={Link}
                                     to={{ pathname: `/goals/${recordingObject.id}/create` }}
-                                    label="Add Goal"
+                                    icon={<Add />}
                                     margin="small"
 
                                 />
@@ -75,13 +77,7 @@ export const Recording = (props) => {
                             </>
                         )
                         :
-                        <Button
-                            primary
-                            as={Link}
-                            to={{ pathname: `/comments/${recordingObject.id}/create` }}
-                            label="Add Comment"
-                            margin="small"
-                        />
+                        ""
                     }
 
 
@@ -91,7 +87,16 @@ export const Recording = (props) => {
 
                         <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
                         <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
-
+                        {relatedExcerpt.created_by_current_user ? "" :
+                        <Button
+                            primary
+                            as={Link}
+                            to={{ pathname: `/comments/${recordingObject.id}/create` }}
+                            icon={<Add />}
+                            label="Add a comment"
+                            margin="small"
+                        />
+                }
                     </Box>
                 </Box>
             </Box>
