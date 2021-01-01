@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { CommentContext } from "./CommentProvider"
 import { Link } from "react-router-dom"
 import { MusicianContext } from "../Musicians/MusicianProvider"
+import { Trash, Edit } from "grommet-icons"
 import {
     Anchor,
     Box,
@@ -58,14 +59,14 @@ export const CommentList = (props) => {
                                             primary
                                             as={Link}
                                             to={{ pathname: `/editcomment/${comment.id}/${props.recordingId}` }}
-                                            label="EDIT"
+                                            icon={<Edit />}
                                             margin="small"
                                         />
                                         <Button
                                             primary
                                             as={Link}
                                             onClick={() => deleteComment(comment.id).then(func)}
-                                            label="DELETE"
+                                            icon={<Trash />}
                                             margin="small"
                                         />
                                     </>
