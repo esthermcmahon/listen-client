@@ -25,7 +25,7 @@ export const RecordingList = (props) => {
 
   return (
     <Box>
-      <Heading level="2">Recordings</Heading>
+      <Heading level="3">Recordings</Heading>
 
       <Box className="categoryList" direction="row">
         <Box background="background-contrast" elevation="small">

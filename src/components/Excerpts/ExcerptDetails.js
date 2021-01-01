@@ -6,6 +6,7 @@ import { ExcerptContext } from "./ExcerptProvider";
 import { Link } from "react-router-dom";
 import { Heading, Button, Box } from "grommet";
 import { RecordingList } from "../Recordings/RecordingList"
+import { Add } from "grommet-icons"
 
 
 export const ExcerptDetails = (props) => {
@@ -36,7 +37,8 @@ export const ExcerptDetails = (props) => {
           primary
           as={Link}
           to={{ pathname: `/excerpts/${excerpt.id}/newrecording` }}
-          label="Add New Recording"
+          icon={<Add />}
+          label="Add new recording"
           margin="small"
 
         />
