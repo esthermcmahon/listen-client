@@ -59,12 +59,13 @@ export const GoalForm = (props) => {
 
   return (
 
-    <Box align="center" alignContent="center">
-      <Heading level="2" className="goal">Category: </Heading>
-      <Box margin="small">
-        <FormField>
+    <Box align="start" alignContent="center">
+     
+      < Heading align="start" margin="none" level="2" className="goal">Category: </Heading>
+      
+        <Box>
           <div className="form-group">
-            <select name="category_id" className="form-control"
+            <select style={{marginTop: "10px", marginLeft:"5px", height: "50px", backgroundColor: "#DADED4", fontFamily: "serif", font: "inherit", borderRadius: "8px", width: "200px", color: "#3C403D"}} name="category_id" className="form-control"
               value={currentGoal.category_id}
               onChange={handleChange}>
 
@@ -76,15 +77,7 @@ export const GoalForm = (props) => {
               ))}
             </select>
           </div>
-        </FormField>
-
-        {/* <Select
-          name="category"
-          options={categories.map(category=> category.label)}
-          value={categories.id}
-          onChange={(category) => {setCategory(categories.find(c => c.label === category.id).id)}}>
-
-        </Select> */}
+       
 
       </Box>
       <Box htmlFor="goal">
@@ -172,47 +165,3 @@ export const GoalForm = (props) => {
   )
 };
 
-// const handleChange = (event) => {
-//     // const newGoalState = Object.assign({}, currentGoal)
-//     // event.target.name === "category_id"
-//     // ? newGoalState[event.target.name] = event.value
-//     // : newGoalState[event.target.name] = event.target.value
-//     currentGoal[event.target.name] = event.target.value
-//     console.log(currentGoal)
-//     setCurrentGoal(currentGoal)
-
-//   }
-
-//if refactoring with grommet
-
-{/* <FormField>
-              <Select
-                id={categories.id}
-                name="category_id"
-                placeholder="Categories"
-                value={categories.id}
-                labelKey="label"
-                valueKey={{ key: "id", reduce: true }}
-                options={categories}
-                onChange = {handleChange}
-                
-              />
-
-            </FormField>  */}
-
-//   useEffect(() => {
-//     if (editMode) {
-//         getCategories()
-//         getGoalById(parseInt(props.match.params.goalId))
-//             .then(goal => {
-//             setCurrentGoal({ 
-//                 recording: goal.recording,
-//                 category_id: goal.category.id,
-//                 goal: goal.goal,
-//                 action: goal.action
-//             })
-//         })
-//     } else {
-//         getCategories()
-//     }
-//   }, [])

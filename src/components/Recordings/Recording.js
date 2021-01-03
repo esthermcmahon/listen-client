@@ -50,10 +50,12 @@ export const Recording = (props) => {
 
             <Box>
                 <Box margin="medium">
-                    <Heading level="4" >{recordingObject.label}</Heading>
-                    <Text>{recordingObject.date}</Text>
+                    <Text weight="bold" size="large">{recordingObject.label}</Text>
+                    <Text weight="bold">{recordingObject.date}</Text>
+                    <Box margin="medium">
 
-                    <audio src={recordingObject.audio} controls />
+                        <audio src={recordingObject.audio} controls />
+                    </Box>
                     {relatedExcerpt.created_by_current_user
                         ? (
                             <>
@@ -62,6 +64,7 @@ export const Recording = (props) => {
                                     as={Link}
                                     onClick={() => deleteRecording(recordingObject.id).then(toggleFunction)}
                                     icon={<Trash/>}
+                                    label="Delete Recording"
                                     margin="small"
                                 />
                                 <Heading level="3">Goals</Heading>
@@ -71,6 +74,7 @@ export const Recording = (props) => {
                                     to={{ pathname: `/goals/${recordingObject.id}/create` }}
                                     icon={<Add />}
                                     margin="small"
+                                    label="Add Goal"
 
                                 />
 

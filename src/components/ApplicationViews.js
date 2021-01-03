@@ -25,7 +25,7 @@ export const ApplicationViews = (props) => {
             <main
                 style={{
                     margin: "5rem 2rem",
-                    lineHeight: "1.75rem",
+                    lineHeight: "1.75rem"
                 }}>
               
 

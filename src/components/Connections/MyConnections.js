@@ -58,7 +58,7 @@ export const MyConnections = () => {
                   {connection.practicer.user.first_name} {connection.practicer.user.last_name}
                 </Anchor>
 
-                <Button primary size="small" pad="small" label="Unfollow" onClick={() => unFollow(connection.practicer.id).then(getConnections)}></Button>
+                <Button primary size="small" label="Unfollow" onClick={() => unFollow(connection.practicer.id).then(getConnections)}></Button>
             </Card>
           )
          : "" )}
