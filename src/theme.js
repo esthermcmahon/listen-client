@@ -174,7 +174,7 @@
 export const theme = 
 {
   "name": "Listen-Lombok",
-  "rounding": 4,
+  "rounding": 8,
   "spacing": 24,
   "defaultMode": "light",
   "global": {
@@ -248,11 +248,91 @@ export const theme =
     "selected": {
       "background": "selected-background",
       "color": "selected-text"
+    },
+    "control": {
+      "border": {
+        "radius": "8px"
+      }
+    },
+    "drop": {
+      "border": {
+        "radius": "8px"
+      }
     }
   },
   "chart": {},
   "diagram": {
     "line": {}
   },
-  "meter": {}
+  "meter": {},
+  "button": {
+    "border": {
+      "radius": "8px"
+    }
+  },
+  "checkBox": {
+    "check": {
+      "radius": "8px"
+    },
+    "toggle": {
+      "radius": "8px"
+    }
+  },
+  "radioButton": {
+    "check": {
+      "radius": "8px"
+    }
+  },
+  "formField": {
+    "border": {
+      "color": "border",
+      "error": {
+        "color": {
+          "dark": "white",
+          "light": "status-critical"
+        }
+      },
+      "position": "inner",
+      "side": "bottom"
+    },
+    "content": {
+      "pad": "small"
+    },
+    "disabled": {
+      "background": {
+        "color": "status-disabled",
+        "opacity": "medium"
+      }
+    },
+    "error": {
+      "color": "status-critical",
+      "margin": {
+        "vertical": "xsmall",
+        "horizontal": "small"
+      }
+    },
+    "help": {
+      "color": "dark-3",
+      "margin": {
+        "start": "small"
+      }
+    },
+    "info": {
+      "color": "text-xweak",
+      "margin": {
+        "vertical": "xsmall",
+        "horizontal": "small"
+      }
+    },
+    "label": {
+      "margin": {
+        "vertical": "xsmall",
+        "horizontal": "small"
+      }
+    },
+    "margin": {
+      "bottom": "small"
+    },
+    "round": "8px"
+  }
 }

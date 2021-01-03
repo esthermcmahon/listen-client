@@ -65,7 +65,7 @@ export const GoalForm = (props) => {
       
         <Box>
           <div className="form-group">
-            <select style={{marginTop: "10px", marginLeft:"5px", height: "50px", backgroundColor: "#DADED4", fontFamily: "serif", font: "inherit", borderRadius: "8px", width: "200px", color: "#3C403D"}} name="category_id" className="form-control"
+            <select style={{marginTop: "10px", marginLeft:"5px", height: "50px", backgroundColor: "#DADED4", fontFamily: "serif", font: "inherit", borderRadius: "8px", width: "200px", color: "#3C403D", borderWidth: "1.5px"}} name="category_id" className="form-control"
               value={currentGoal.category_id}
               onChange={handleChange}>
 
