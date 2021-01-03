@@ -48,8 +48,9 @@ export const MyConnections = () => {
         {connections.map(connection => 
           connection.practicer.user.id !== currentUser.id && connection.follower.user.id === currentUser.id && connection.ended_on == null ?
           (
-            <Card margin="small">
+            <Card margin="small" direction="row-responsive" >
               <Anchor
+                  margin="small"
                   color="text"
                   as={Link}
                   to={{ pathname: `/profiles/${connection.practicer.user.id}` }}
@@ -57,7 +58,7 @@ export const MyConnections = () => {
                   {connection.practicer.user.first_name} {connection.practicer.user.last_name}
                 </Anchor>
 
-                <Button primary label="Unfollow" onClick={() => unFollow(connection.practicer.id).then(getConnections)}></Button>
+                <Button primary size="small" pad="small" label="Unfollow" onClick={() => unFollow(connection.practicer.id).then(getConnections)}></Button>
             </Card>
           )
          : "" )}
