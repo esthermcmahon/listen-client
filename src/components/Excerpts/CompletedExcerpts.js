@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { ExcerptContext } from "./ExcerptProvider"
 import { Link } from "react-router-dom"
 import { MusicianContext } from "../Musicians/MusicianProvider"
+import { Add } from "grommet-icons"
 import {
     Anchor,
     Box,
@@ -69,8 +70,11 @@ export const CompletedExcerpts = (props) => {
                                         <Button
                                             primary
                                             onClick={() => undone(excerpt.id).then(func)}
+                                            icon={<Add />}
                                             label="Add to Dashboard"
                                             margin="small"
+                                            pad="small"
+                                            
                                         /> : ""
 
                                     }
