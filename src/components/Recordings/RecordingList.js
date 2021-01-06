@@ -25,11 +25,10 @@ export const RecordingList = (props) => {
 
   return (
     <Box>
-      <Heading level="3">Recordings</Heading>
+      <Heading level="2" margin={{bottom: "none"}} >Recordings</Heading>
 
       <Box className="categoryList" direction="row">
-        <Box background="background-contrast" elevation="small">
-        </Box>
+     
         <Box>
 
           {recordings.map((recordingObject) => {

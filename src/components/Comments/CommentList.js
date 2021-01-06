@@ -43,7 +43,7 @@ export const CommentList = (props) => {
 
     return (
         <Box>
-            <Heading level="3">Comments</Heading>
+            <Heading level="3" margin={{left: "none"}}>Comments</Heading>
             <Box>
                 {
                     comments.map((comment) => {
