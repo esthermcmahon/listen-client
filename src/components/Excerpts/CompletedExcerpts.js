@@ -3,6 +3,7 @@ import { ExcerptContext } from "./ExcerptProvider"
 import { Link } from "react-router-dom"
 import { MusicianContext } from "../Musicians/MusicianProvider"
 import { Add } from "grommet-icons"
+import "./extra.css"
 import {
     Anchor,
     Box,
@@ -53,6 +54,7 @@ export const CompletedExcerpts = (props) => {
                                     margin="small"
                                     pad="xsmall"
                                     width="medium"
+                                    className="completedCard"
                                 >
 
                                     <CardHeader>
@@ -62,7 +64,7 @@ export const CompletedExcerpts = (props) => {
                                             to={{ pathname: `/excerpts/${excerpt.id}` }}
                                         >
                                             <CardHeader>
-                                                <Text weight="bold">{excerpt.name}</Text>
+                                                <Text margin="xsmall" weight="bold">{excerpt.name}</Text>
                                             </CardHeader>
                                         </Anchor>
                                     </CardHeader>
@@ -72,6 +74,7 @@ export const CompletedExcerpts = (props) => {
                                             onClick={() => undone(excerpt.id).then(func)}
                                             icon={<Add />}
                                             label="Add to Dashboard"
+                                            className="excerptDetailsButton"
                                             margin="small"
                                             pad="small"
                                             

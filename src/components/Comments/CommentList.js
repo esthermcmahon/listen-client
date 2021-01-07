@@ -1,20 +1,14 @@
 import React, { useContext, useEffect, useState } from "react"
 import { CommentContext } from "./CommentProvider"
-import { Link } from "react-router-dom"
 import { MusicianContext } from "../Musicians/MusicianProvider"
-import { Trash, Edit } from "grommet-icons"
+import { Trash, Edit, More } from "grommet-icons"
 import {
-    Anchor,
     Box,
-    Button,
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
+    Menu,
     Heading,
     Text,
 } from "grommet";
-import { get } from "http";
+import { DeleteComment } from "./DeleteComment"
 
 export const CommentList = (props) => {
     const { deleteComment, getCommentByRecording } = useContext(CommentContext)
@@ -22,6 +16,9 @@ export const CommentList = (props) => {
 
     const [comments, setComments] = useState([])
 
+    const [open, setOpen] = useState();
+    const onOpen = () => setOpen(true);
+    const onClose = () => setOpen(undefined);
     const [change, setChange] = useState(false)
 
     const relatedExcerpt = props.relatedExcerpt
@@ -43,7 +40,7 @@ export const CommentList = (props) => {
 
     return (
         <Box>
-            <Heading level="3" margin={{left: "none"}}>Comments</Heading>
+            <Heading level="3" margin={{ left: "none" }}>Comments</Heading>
             <Box>
                 {
                     comments.map((comment) => {
@@ -55,20 +52,36 @@ export const CommentList = (props) => {
 
                                 {comment.created_by_current_user ? (
                                     <>
-                                        <Button
-                                            primary
-                                            as={Link}
-                                            to={{ pathname: `/editcomment/${comment.id}/${props.recordingId}` }}
-                                            icon={<Edit />}
-                                            margin="small"
-                                        />
-                                        <Button
-                                            primary
-                                            as={Link}
-                                            onClick={() => deleteComment(comment.id).then(func)}
-                                            icon={<Trash />}
-                                            margin="small"
-                                        />
+
+                                        <DeleteComment open={open} onClose={onClose} commentId={comment.id} func={func} />
+                                        <Box width="xsmall" margin={{ left: "none", bottom: "medium" }}>
+                                            <Menu
+                                                icon={<More />}
+                                                hoverIndicator
+                                                alignSelf="start"
+                                                size="small"
+                                                items={[
+                                                    {
+                                                        icon: (
+                                                            <Box>
+                                                                <Edit />
+                                                            </Box>
+                                                        ),
+                                                        onClick: () =>
+                                                            props.history.push(`/editcomment/${comment.id}/${props.recordingId}`),
+                                                    },
+                                                    {
+                                                        icon: (
+                                                            <Box>
+                                                                <Trash />
+                                                            </Box>
+                                                        ),
+                                                        onClick: () => onOpen(),
+
+                                                    },
+                                                ]}
+                                            />
+                                        </Box>
                                     </>
                                 )
                                     : ""}

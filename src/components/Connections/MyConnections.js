@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MusicianContext } from "../Musicians/MusicianProvider";
 import { ConnectionContext } from "./ConnectionProvider"
-import { Anchor, Box, Heading, List, Text, Button, Card } from "grommet";
+import { Anchor, Box, Heading, Text, Button, Card } from "grommet";
+import "../Excerpts/extra.css"
 
 
 export const MyConnections = () => {
@@ -45,11 +46,11 @@ export const MyConnections = () => {
       <Heading level="1">My Connections</Heading>
 
       <Box background="background-contrast" elevation="large">
-        {connections.map(connection => 
+        {connections.map(connection =>
           connection.practicer.user.id !== currentUser.id && connection.follower.user.id === currentUser.id && connection.ended_on == null ?
-          (
-            <Card margin="small" direction="row-responsive" >
-              <Anchor
+            (
+              <Card margin="small" direction="row-responsive" >
+                <Anchor
                   margin="small"
                   color="text"
                   as={Link}
@@ -58,39 +59,17 @@ export const MyConnections = () => {
                   {connection.practicer.user.first_name} {connection.practicer.user.last_name}
                 </Anchor>
 
-                <Button primary size="small" label="Unfollow" onClick={() => unFollow(connection.practicer.id).then(getConnections)}></Button>
-            </Card>
-          )
-         : "" )}
-
-        {/* <List
-          data={connections}
-          primaryKey={(connection) =>
-            connection.practicer.user.id !== currentUser.id && connection.follower.user.id === currentUser.id && connection.ended_on == null ? (
-              <>
-                <Anchor
-                  color="text"
-                  as={Link}
-                  to={{ pathname: `/profiles/${connection.practicer.user.id}` }}
-                >
-                  {connection.practicer.user.first_name} {connection.practicer.user.last_name}
-                </Anchor>
-
-                <Button primary label="Unfollow" onClick={() => unFollow(connection.practicer.id).then(getConnections)}></Button>
-              </>
+                <Button primary size="small" label="Unfollow" alignSelf="center" className="unfollowButton" onClick={() => unFollow(connection.practicer.id).then(getConnections)}></Button>
+              </Card>
             )
+            : "")}
 
-
-
-              : ""
-          }
-        /> */}
 
       </Box>
 
       <Heading level="2">Find a Musician</Heading>
       <Box>
-        <input type="text" className="musicians__search"
+        <input type="text" className="musicians__search" style={{ borderRadius: "8px", width: "400px", height: "20px" }}
           onChange={handleChange}
           placeholder="Enter search string here..." />
 
@@ -100,7 +79,7 @@ export const MyConnections = () => {
         return (
           <Box direction="row" padding="medium" margin="medium">
             <Text margin="medium">{musician.user.username}</Text>
-            <Button primary label="Follow" onClick={() => {
+            <Button primary label="Follow" className="unfollowButton" alignSelf="center" onClick={() => {
               createConnection({
                 practicer: parseInt(musician.id)
 

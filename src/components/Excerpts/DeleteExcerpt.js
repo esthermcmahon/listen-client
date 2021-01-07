@@ -1,4 +1,4 @@
-//delete goal component with confirmation modal
+//delete excerpt component with confirmation modal
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { ExcerptContext } from "./ExcerptProvider";

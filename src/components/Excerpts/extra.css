@@ -1,0 +1,19 @@
+.excerptDetailsButton {
+    width: 250px !important;
+}
+
+.completedCard {
+
+    width: 300px !important;
+}
+
+.excerptWithButtons {
+    display: flex !important;
+}
+
+.unfollowButton {
+    width: 100px;
+    height: 40px;
+    border-radius: 8px !important;
+    
+}
