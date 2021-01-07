@@ -1,6 +1,6 @@
 //delete goal component with confirmation modal
-import React, { useState, useContext } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { GoalContext } from "./GoalProvider";
 import { Box, Button, Heading, Layer, Text } from "grommet"
 import { Trash } from "grommet-icons"

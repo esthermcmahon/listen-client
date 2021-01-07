@@ -119,7 +119,7 @@ export const GoalForm = (props) => {
             <Heading level="3">Confirm</Heading>
             <Text>Are you sure you want to make these changes?</Text>
             <Box size="small" direction="row-responsive">
-              <Button primary label="Edit" onClick={() => {
+              <Button primary label="Edit" margin="xsmall" onClick={() => {
 
                 editGoal({
                   id: parseInt(props.match.params.goalId),
@@ -144,7 +144,7 @@ export const GoalForm = (props) => {
       )}
       {editMode ? "" :
         <Button primary label="Create New Goal"
-          type="submit"
+          type="submit" margin="xsmall"
           onClick={(evt) => {
             evt.preventDefault()
             createGoal({

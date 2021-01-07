@@ -49,7 +49,7 @@ export const ExcerptForm = (props) => {
 
     <Box align="center" alignContent="center">
       <Box htmlFor="name">
-        <Heading level="2" className="name">Excerpt</Heading>
+        <Heading level="2" className="name">Name your excerpt:</Heading>
         <Box margin="small">
         <TextInput
           type="text"

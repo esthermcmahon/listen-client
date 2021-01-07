@@ -24,9 +24,9 @@ export const ExcerptDetails = (props) => {
   const [change, setChange] = useState(false)
 
   const func = () => {
-        change ? setChange(false) : setChange(true)
+    change ? setChange(false) : setChange(true)
 
-    }
+  }
 
   //gets an excerpt by the excerptId
   useEffect(() => {
@@ -37,54 +37,55 @@ export const ExcerptDetails = (props) => {
 
   return (
     <>
-      
-      <Heading level="1" className="post__title" margin={{bottom: "none"}}>
+
+      <Heading level="1" className="post__title" margin={{ bottom: "none" }}>
         {excerpt.name}
       </Heading>
       {excerpt.created_by_current_user
-        ? 
+        ?
         <>
-        <DeleteExcerpt open={open} onClose={onClose} excerptId={excerpt.id} func={func} />
-        <Box width="xsmall" margin={{left: "none", bottom: "medium"}}>
+          <DeleteExcerpt open={open} onClose={onClose} excerptId={excerpt.id} func={func} />
+          <Box width="xsmall" margin={{ left: "none", bottom: "medium" }}>
             <Menu
-                icon={<More />}
-                hoverIndicator
-                alignSelf="start"
-                size="small"
-                items={[
-                    {
-                        icon: (
-                            <Box>
-                                <Edit />
-                            </Box>
-                        ),
-                        onClick: () =>
-                            props.history.push(`/editexcerpt/${excerpt.id}`),
-                    },
-                    {
-                        icon: (
-                            <Box>
-                                <Trash />
-                            </Box>
-                        ),
-                        onClick: () => onOpen(),
-                       
-                    },
-                ]}
+              icon={<More />}
+              hoverIndicator
+              alignSelf="start"
+              size="small"
+              items={[
+                {
+                  icon: (
+                    <Box>
+                      <Edit />
+                    </Box>
+                  ),
+                  onClick: () =>
+                    props.history.push(`/editexcerpt/${excerpt.id}`),
+                },
+                {
+                  icon: (
+                    <Box>
+                      <Trash />
+                    </Box>
+                  ),
+                  onClick: () => onOpen(),
+
+                },
+              ]}
             />
           </Box>
-          
 
-        <Button
-          primary
-          as={Link}
-          to={{ pathname: `/excerpts/${excerpt.id}/newrecording` }}
-          icon={<Add />}
-          label="Add new recording"
-          margin={{top: "none", bottom: "small"}}
 
-        />
-       </> : ""
+
+          <Button
+            primary
+            as={Link}
+            to={{ pathname: `/excerpts/${excerpt.id}/newrecording` }}
+            icon={<Add />}
+            label="Add new recording"
+            margin={{ top: "none", bottom: "small" }}
+
+          />
+        </> : ""
 
       }
 

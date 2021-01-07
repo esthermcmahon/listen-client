@@ -1,8 +1,7 @@
 //module to list recordings on the excerpt details
 import React, { useEffect, useContext, useState } from "react";
 import { RecordingContext } from "./RecordingProvider";
-import { Button, Box, Heading, List, Text } from "grommet";
-import { Link } from "react-router-dom";
+import { Box, Heading } from "grommet";
 import { Recording } from "./Recording"
 export const RecordingList = (props) => {
   const { getRecordingByExcerpt } = useContext(RecordingContext);

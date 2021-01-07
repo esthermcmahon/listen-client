@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ExcerptContext } from "./ExcerptProvider"
 import { Excerpt } from "./Excerpt"
-import { MusicianContext } from "../Musicians/MusicianProvider"
+import { Heading } from "grommet";
 
 
 export const PracticerExcerptList = (props) => {
@@ -17,7 +17,7 @@ export const PracticerExcerptList = (props) => {
 
     return (
         <section>
-            <h3>Excerpts</h3>
+            <Heading level="3">Excerpts</Heading>
             <div className="excerpts">
 
                 {

@@ -5,18 +5,14 @@ import { GoalsPerRecording } from "../Goals/GoalsPerRecording"
 import { RecordingContext } from "./RecordingProvider"
 import { Trash, Add } from "grommet-icons"
 import {
-    Anchor,
     Box,
     Button,
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
     Heading,
     Text,
 } from "grommet";
 import { CommentList } from "../Comments/CommentList"
 import { ExcerptContext } from "../Excerpts/ExcerptProvider"
+import "../Excerpts/extra.css"
 
 export const Recording = (props) => {
     const { getRecordingById, deleteRecording } = useContext(RecordingContext)
@@ -66,7 +62,8 @@ export const Recording = (props) => {
                                     onClick={() => deleteRecording(recordingObject.id).then(toggleFunction)}
                                     icon={<Trash />}
                                     label="Delete Recording"
-                                    margin="small"
+                                    className="excerptDetailsButton"
+                                    
                                 />
 
 
@@ -76,8 +73,9 @@ export const Recording = (props) => {
                                     as={Link}
                                     to={{ pathname: `/goals/${recordingObject.id}/create` }}
                                     icon={<Add />}
-                                    margin="small"
-                                    label="Add Goal"
+                                    margin="xsmall"
+                                    label="Add New Goal"
+                                    className="excerptDetailsButton"
 
                                 />
 
