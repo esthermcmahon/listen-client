@@ -4,32 +4,30 @@ import { ExcerptContext } from "./ExcerptProvider"
 import {
   Anchor,
   Box,
-  Button,
   Card,
-  CardBody,
-  CardFooter,
   CheckBox,
   CardHeader,
-  Heading,
   Text,
 } from "grommet";
 
 
 
+
+
 export const Excerpt = (props) => {
-  const { getExcerptById, excerpts, getExcerpts, done } = useContext(ExcerptContext)
+  const { getExcerptById, done } = useContext(ExcerptContext)
 
   const [excerpt, setExcerpt] = useState({})
 
   const [checked, setChecked] = useState(false)
 
+  const [change, setChange] = useState(false)
+
   useEffect(() => {
     const excerptId = parseInt(props.excerpt.id)
     getExcerptById(excerptId)
       .then(setExcerpt)
-
-
-  }, [])
+  }, [change])
 
   const handleChange = (event) => {
     setChecked(event.target.checked)
@@ -40,33 +38,40 @@ export const Excerpt = (props) => {
 
 
   return (
-    <Box key={excerpt.id} width="medium">
-      <Card
-        className="container__cardContent"
-        background="light-1"
-        margin="small"
-        pad="xsmall"
-        width="medium"
-      >
-        <Anchor
-          color="brand"
-          as={Link}
-          to={{ pathname: `/excerpts/${excerpt.id}` }}
+    <>
+
+      <Box key={excerpt.id} width="medium">
+        <Card
+          className="container__cardContent"
+          background="light-1"
+          margin="small"
+          pad="xsmall"
+          width="medium"
         >
-          <CardHeader>
-            <Text weight="bold">{excerpt.name}</Text>
-          </CardHeader>
-        </Anchor>
-        {excerpt.created_by_current_user ?
-          <CheckBox
-            checked={checked}
-            onChange={handleChange}
-          /> : ""
-        }
+          <Anchor
+            color="brand"
+            as={Link}
+            to={{ pathname: `/excerpts/${excerpt.id}` }}
+          >
+            <CardHeader>
+              <Text weight="bold">{excerpt.name}</Text>
+            </CardHeader>
+          </Anchor>
+          {excerpt.created_by_current_user ?
+            <>
+              <CheckBox
+                checked={checked}
+                onChange={handleChange}
+              />
+
+            </> : ""
+          }
 
 
-      </Card>
-    </Box>
+        </Card>
+      </Box>
+
+    </>
 
   )
 

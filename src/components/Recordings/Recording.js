@@ -31,7 +31,7 @@ export const Recording = (props) => {
 
     const toggleFunction = () => {
         props.func()
-    } 
+    }
 
 
     useEffect(() => {
@@ -55,6 +55,7 @@ export const Recording = (props) => {
                     <Box margin="medium">
 
                         <audio src={recordingObject.audio} controls />
+
                     </Box>
                     {relatedExcerpt.created_by_current_user
                         ? (
@@ -63,11 +64,13 @@ export const Recording = (props) => {
                                     primary
                                     as={Link}
                                     onClick={() => deleteRecording(recordingObject.id).then(toggleFunction)}
-                                    icon={<Trash/>}
+                                    icon={<Trash />}
                                     label="Delete Recording"
                                     margin="small"
                                 />
-                                <Heading level="3">Goals</Heading>
+
+
+                                <Heading level="3" margin={{top: "large"}}>Goals</Heading>
                                 <Button
                                     primary
                                     as={Link}
@@ -92,15 +95,15 @@ export const Recording = (props) => {
                         <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
                         <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
                         {relatedExcerpt.created_by_current_user ? "" :
-                        <Button
-                            primary
-                            as={Link}
-                            to={{ pathname: `/comments/${recordingObject.id}/create` }}
-                            icon={<Add />}
-                            label="Add a comment"
-                            margin="small"
-                        />
-                }
+                            <Button
+                                primary
+                                as={Link}
+                                to={{ pathname: `/comments/${recordingObject.id}/create` }}
+                                icon={<Add />}
+                                label="Add a comment"
+                                margin="small"
+                            />
+                        }
                     </Box>
                 </Box>
             </Box>

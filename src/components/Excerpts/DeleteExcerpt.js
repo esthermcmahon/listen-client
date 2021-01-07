@@ -1,29 +1,31 @@
 //delete goal component with confirmation modal
-import React, { useState, useContext } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { GoalContext } from "./GoalProvider";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { ExcerptContext } from "./ExcerptProvider";
 import { Box, Button, Heading, Layer, Text } from "grommet"
-import { Trash } from "grommet-icons"
 
 
-export const DeleteGoal = ({ open, onClose, goalId, relatedExcerpt, func }) => {
-  const { deleteGoal } = useContext(GoalContext);
+
+export const DeleteExcerpt = ({ open, onClose, excerptId, func }) => {
+  const { deleteExcerpt } = useContext(ExcerptContext);
   const history = useHistory()
 
   //function that is called when the delete button is clicked. 
-  //This function deletes a goal
+  //This function deletes an excerpt
   //Lastly the function calls the close function which resets our modal state.
-  const deleteThisGoal = () => {
-    deleteGoal(goalId)
+  const deleteThisExcerpt = () => {
+    deleteExcerpt(excerptId)
+    .then(func)
     .then(onClose)
     .then(() => {
-      history.push(`/excerpts/${relatedExcerpt.id}`)
+      history.push(`/home`)
     })
-    .then(func)
+    
   };
 
   return (
     <>
+     
       {open && (
         <Layer onEsc={onClose} onClickOutside={onClose} responsive={true} position="center">
           <Box  margin="xsmall">
@@ -32,7 +34,7 @@ export const DeleteGoal = ({ open, onClose, goalId, relatedExcerpt, func }) => {
             </Heading>
             <Text margin="xsmall">Are you sure you want to delete?</Text>
             <Box direction="row-responsive">
-              <Button primary margin="small" label="Delete" onClick={deleteThisGoal} />
+              <Button primary margin="small" label="Delete" onClick={deleteThisExcerpt} />
               <Button secondary margin="small" label="Cancel" onClick={onClose} />
             </Box>
           </Box>

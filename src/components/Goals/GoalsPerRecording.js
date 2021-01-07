@@ -1,9 +1,7 @@
 //module to render goals for a specific recording
 import React, { useEffect, useContext, useState } from "react";
 import { GoalContext } from "./GoalProvider";
-import { RecordingContext } from "../Recordings/RecordingProvider"
-import { Button, Box, Heading, List, Text, Card, Menu } from "grommet";
-import { Link } from "react-router-dom";
+import { Box, Heading, Text, Card, Menu } from "grommet";
 import { Edit, More, Trash } from "grommet-icons";
 import { DeleteGoal } from "./DeleteGoal"
 
