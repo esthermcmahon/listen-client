@@ -1,6 +1,11 @@
 //Register form for new user
 import React, { useRef } from "react"
 import { Link } from "react-router-dom"
+import "../Excerpts/extra.css"
+import {
+    Box,
+    Button
+  } from "grommet";
 
 export const Register = (props) => {
     const firstName = useRef()
@@ -42,7 +47,7 @@ export const Register = (props) => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
+        <Box style={{ textAlign: "center" }}>
 
             <dialog className="dialog dialog--password" ref={passwordDialog}>
                 <div>Passwords do not match</div>
@@ -52,40 +57,40 @@ export const Register = (props) => {
                 <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
-                    <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="first name" />
+                    <input ref={firstName} type="text" name="firstName" className="form-control registerInput" placeholder="first name" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="lastName"> Last Name </label>
-                    <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="last name" />
+                    <input ref={lastName} type="text" name="lastName" className="form-control registerInput" placeholder="last name" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="userName"> Username </label>
-                    <input ref={userName} type="text" name="userName" className="form-control" placeholder="display name" />
+                    <input ref={userName} type="text" name="userName" className="form-control registerInput" placeholder="display name" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email Address</label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="email address" required />
+                    <input ref={email} type="email" name="email" className="form-control registerInput" placeholder="email address" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
-                    <input ref={password} type="password" name="password" className="form-control" placeholder="password" required />
+                    <input ref={password} type="password" name="password" className="form-control registerInput" placeholder="password" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
-                    <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="re-enter password" required />
+                    <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control registerInput" placeholder="re-enter password" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="bio"> Short Bio </label>
-                    <input ref={bio} type="text" name="bio" className="form-control" placeholder="A short bio about yourself" required />
+                    <input ref={bio} type="text" name="bio" className="form-control registerInput" placeholder="A short bio about yourself" required />
                 </fieldset>
                 <fieldset>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Register</button>
+                    <Button size="large" label="Register" fill={false} margin="small" pad="small" primary type="submit" />
                 </fieldset>
             </form>
             <section className="link--register">
                 <div>Already Registered?</div>
                 <Link to="/login">Login</Link>
             </section>
-        </main>
+        </Box>
     )
 }

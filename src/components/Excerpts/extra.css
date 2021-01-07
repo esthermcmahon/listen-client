@@ -17,3 +17,8 @@
     border-radius: 8px !important;
     
 }
+
+.registerInput {
+    border-radius: 8px;
+    height: 40px;
+}

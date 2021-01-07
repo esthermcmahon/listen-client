@@ -1,6 +1,6 @@
 //login page
 import React, { useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Anchor,
   Box,
@@ -100,7 +100,6 @@ export const Login = (props) => {
               required
             />
           </FormField>
-          <FormField>
             <Box align="center" pad="medium">
               <Button
                 size="large"
@@ -112,7 +111,6 @@ export const Login = (props) => {
                 type="submit"
               />
             </Box>
-          </FormField>
         </Form>
       </Box>
       <Box className="link--register">
@@ -123,6 +121,7 @@ export const Login = (props) => {
           href="/register"
           margin="small"
           justify="center"
+          alignSelf="center"
         >
           Not a member yet?
         </Anchor>

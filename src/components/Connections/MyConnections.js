@@ -71,7 +71,7 @@ export const MyConnections = () => {
       <Box>
         <input type="text" className="musicians__search" style={{ borderRadius: "8px", width: "400px", height: "20px" }}
           onChange={handleChange}
-          placeholder="Enter search string here..." />
+          placeholder="Enter username, first name, or last name" />
 
       </Box>
       {filteredMusicians.map(musician => {
