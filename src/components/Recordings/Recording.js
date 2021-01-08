@@ -4,12 +4,7 @@ import { Link } from "react-router-dom"
 import { GoalsPerRecording } from "../Goals/GoalsPerRecording"
 import { RecordingContext } from "./RecordingProvider"
 import { Trash, Add } from "grommet-icons"
-import {
-    Box,
-    Button,
-    Heading,
-    Text,
-} from "grommet";
+import { Box, Button, Heading, Text } from "grommet";
 import { CommentList } from "../Comments/CommentList"
 import { ExcerptContext } from "../Excerpts/ExcerptProvider"
 import "../Excerpts/extra.css"
@@ -61,23 +56,23 @@ export const Recording = (props) => {
                                     as={Link}
                                     onClick={() => deleteRecording(recordingObject.id).then(toggleFunction)}
                                     icon={<Trash />}
+                                    margin={{top:"small", bottom: "small", left:"xsmall", right:"small"}}
                                     label="Delete Recording"
                                     className="excerptDetailsButton"
                                     
                                 />
 
-
-                                <Heading level="3" margin={{top: "large"}}>Goals</Heading>
                                 <Button
                                     primary
                                     as={Link}
+                                    margin={{top:"large", bottom: "small", left:"xsmall", right:"small"}}
                                     to={{ pathname: `/goals/${recordingObject.id}/create` }}
                                     icon={<Add />}
-                                    margin="xsmall"
                                     label="Add New Goal"
                                     className="excerptDetailsButton"
 
                                 />
+                                
 
                             </>
                         )
@@ -88,20 +83,26 @@ export const Recording = (props) => {
 
 
 
-                    <Box margin="medium">
+                    <Box margin="medium" direction="row-responsive">
 
                         <GoalsPerRecording recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
+                        <Box direction="column">
                         <CommentList recordingId={recordingObject.id} {...props} relatedExcerpt={relatedExcerpt} />
+                        
                         {relatedExcerpt.created_by_current_user ? "" :
                             <Button
                                 primary
+                                margin={{top: "small", left: "xlarge", right:"small", bottom:"small"}}
                                 as={Link}
                                 to={{ pathname: `/comments/${recordingObject.id}/create` }}
                                 icon={<Add />}
                                 label="Add a comment"
-                                margin="small"
+                                className="commentButton"
+                                
+                                
                             />
                         }
+                        </Box>
                     </Box>
                 </Box>
             </Box>

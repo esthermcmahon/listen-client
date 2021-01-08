@@ -7,6 +7,7 @@ import {
     Menu,
     Heading,
     Text,
+    Card
 } from "grommet";
 import { DeleteComment } from "./DeleteComment"
 
@@ -40,21 +41,23 @@ export const CommentList = (props) => {
 
     return (
         <Box>
-            <Heading level="3" margin={{ left: "none" }}>Comments</Heading>
+            
             <Box>
                 {
                     comments.map((comment) => {
                         return (
-                            <>
+                            <>  
+                                <Heading level="3" margin={{top: "small", left:"xlarge", right:"small", bottom:"small"}}>Comments</Heading>
+                                <Card background="#D5ECE1" margin={{top: "small", left: "xlarge", right:"small", bottom:"small"}} pad="medium">
                                 <Text>{comment.content}</Text>
                                 <Text>{comment.date}</Text>
                                 <Text>{comment.author.user.first_name} {comment.author.user.last_name}</Text>
-
+                               
                                 {comment.created_by_current_user ? (
                                     <>
 
                                         <DeleteComment open={open} onClose={onClose} commentId={comment.id} func={func} />
-                                        <Box width="xsmall" margin={{ left: "none", bottom: "medium" }}>
+                                        <Box width="xsmall" margin={{ left: "none", bottom: "xsmall" }}>
                                             <Menu
                                                 icon={<More />}
                                                 hoverIndicator
@@ -85,7 +88,9 @@ export const CommentList = (props) => {
                                     </>
                                 )
                                     : ""}
+                                    </Card>
                             </>
+                            
                         )
                     })
                 }

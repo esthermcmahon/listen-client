@@ -73,7 +73,7 @@ export const CommentForm = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
-                {editMode ? <Button primary margin="small" label="EDIT" className="edit_goal" onClick={onOpen} /> : ""}
+                {editMode ? <Button primary margin="small" label="SUBMIT" className="edit_goal" onClick={onOpen} /> : ""}
             </Box>
 
             {open && (
@@ -87,7 +87,7 @@ export const CommentForm = (props) => {
                         <Heading level="3">Confirm</Heading>
                         <Text>Are you sure you want to make these changes?</Text>
                         <Box size="small" direction="row-responsive">
-                            <Button primary label="Edit" onClick={() => {
+                            <Button primary label="Submit" onClick={() => {
 
                                 editComment({
                                     id: parseInt(props.match.params.commentId),
