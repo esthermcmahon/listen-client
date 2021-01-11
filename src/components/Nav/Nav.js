@@ -18,9 +18,9 @@ export const NavBar = () => {
                     <Heading color="text-weak" level="1" margin={{ bottom: "0" }}>Listen</Heading>
                 </Box>
                 <Box direction="row-responsive" gap="small" align="baseline">
-                    <Anchor color="text-weak" as={Link} className="navbar__link" to="/home" label="Home" />
-                    <Anchor color="text-weak" as={Link} className="navbar__link" to="/connections" label="My Connections" />
+                    <Anchor color="text-weak" as={Link} className="navbar__link" to="/home" label="Dashboard" />
                     <Anchor color="text-weak" as={Link} className="navbar__link" to="/excerpts/create" label="New Excerpt" />
+                    <Anchor color="text-weak" as={Link} className="navbar__link" to="/connections" label="My Connections" />
                     <Anchor color="text-weak" as={Link} className="navbar__link" to="/completed" label="Completed" />
 
                     {

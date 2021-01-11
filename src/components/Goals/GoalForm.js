@@ -105,7 +105,7 @@ export const GoalForm = (props) => {
 
 
 
-        {editMode ? <Button primary margin="small" label="EDIT" className="edit_goal" onClick={onOpen} /> : ""}
+        {editMode ? <Button primary margin="small" label="SUBMIT" className="edit_goal" onClick={onOpen} /> : ""}
       </Box>
 
       {open && (
@@ -119,7 +119,7 @@ export const GoalForm = (props) => {
             <Heading level="3">Confirm</Heading>
             <Text>Are you sure you want to make these changes?</Text>
             <Box size="small" direction="row-responsive">
-              <Button primary label="Edit" margin="xsmall" onClick={() => {
+              <Button primary label="Submit" margin="xsmall" onClick={() => {
 
                 editGoal({
                   id: parseInt(props.match.params.goalId),

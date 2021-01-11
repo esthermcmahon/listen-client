@@ -29,7 +29,7 @@ export const CommentForm = (props) => {
 
 
     useEffect(() => {
-
+        
         getRecordingById(parseInt(props.match.params.recordingId))
             .then(setRecording)
             .then(() => {
@@ -46,7 +46,7 @@ export const CommentForm = (props) => {
                         
                 }
             })
-        console.log(recording)
+    
 
     }, [])
 
@@ -73,7 +73,7 @@ export const CommentForm = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
-                {editMode ? <Button primary margin="small" label="EDIT" className="edit_goal" onClick={onOpen} /> : ""}
+                {editMode ? <Button primary margin="small" label="SUBMIT" className="edit_goal" onClick={onOpen} /> : ""}
             </Box>
 
             {open && (
@@ -87,7 +87,7 @@ export const CommentForm = (props) => {
                         <Heading level="3">Confirm</Heading>
                         <Text>Are you sure you want to make these changes?</Text>
                         <Box size="small" direction="row-responsive">
-                            <Button primary label="Edit" onClick={() => {
+                            <Button primary label="Submit" onClick={() => {
 
                                 editComment({
                                     id: parseInt(props.match.params.commentId),
@@ -95,7 +95,7 @@ export const CommentForm = (props) => {
                                     recording: parseInt(recordingId)
 
                                 }).then(() => {
-                                    props.history.push(`/profiles/${recording.excerpt.musician.id}`)
+                                    props.history.push(`/excerpts/${recording.excerpt.id}`)
                                 })
                             }}
                                 margin="small"
@@ -112,12 +112,13 @@ export const CommentForm = (props) => {
                 <Button primary label="Create New Comment"
                     type="submit"
                     onClick={(evt) => {
+                        console.log(recording)
                         evt.preventDefault()
                         createComment({
                             content: currentComment.content,
                             recording: parseInt(recordingId)
                         })
-                            .then(() => props.history.push(`/profiles/${recording.excerpt.musician.id}`))
+                            .then(() => props.history.push(`/excerpts/${recording.excerpt.id}`))
                     }}
 
                 />

@@ -44,7 +44,7 @@ export const Excerpt = (props) => {
         <Card
           className="container__cardContent"
           background="light-1"
-          margin="small"
+          margin={{left: "xsmall", right: "xsmall", top: "small", bottom: "small"}}
           pad="xsmall"
           width="medium"
         >
