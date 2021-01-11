@@ -33,7 +33,6 @@ export const GoalsPerRecording = (props) => {
     return (
         <Box>
             <Box className="" direction="column">
-            <Heading level="3" margin={{top: "small", left:"small", right:"small", bottom:"small"}}>Goals</Heading>
                 <Box background="background-contrast" elevation="small">
                 </Box>
                 <Box>
@@ -41,6 +40,7 @@ export const GoalsPerRecording = (props) => {
                         return (
                             <>
                                 <DeleteGoal open={open} onClose={onClose} goalId={goal.id} relatedExcerpt={relatedExcerpt} func={func}/>
+                                <Heading level="3" margin={{top: "small", left:"small", right:"small", bottom:"small"}}>Goals</Heading>
                                 <Box key={goal.id} width="medium">
                                     <Card className="container__cardContent" margin="xsmall" pad="medium" background="#CCE1CE">
                                         <Heading level="3">{goal.category.label}</Heading>

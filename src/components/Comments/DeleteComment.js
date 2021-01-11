@@ -1,5 +1,5 @@
 //delete comment component with confirmation modal
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { CommentContext } from "./CommentProvider";
 import { Box, Button, Heading, Layer, Text } from "grommet"
@@ -7,8 +7,19 @@ import { Box, Button, Heading, Layer, Text } from "grommet"
 
 
 export const DeleteComment = ({ open, onClose, commentId, func }) => {
-    const { deleteComment } = useContext(CommentContext);
+    const { deleteComment, getCommentById } = useContext(CommentContext)
+
     const history = useHistory()
+
+    const [comment, setComment] = useState({recording:{excerpt:{}}})
+
+    useEffect(() => {
+        getCommentById(commentId)
+            .then(setComment)
+        
+    }, [])
+
+    const excerptId = parseInt(comment.recording.excerpt.id)
 
     //function that is called when the delete button is clicked. 
     //This function deletes a comment
@@ -18,7 +29,8 @@ export const DeleteComment = ({ open, onClose, commentId, func }) => {
             .then(func)
             .then(onClose)
             .then(() => {
-                history.push(`/home`)
+                // history.push(`/home`)
+                history.push(`/excerpts/${excerptId}`)
             })
 
     };

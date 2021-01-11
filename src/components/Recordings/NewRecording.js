@@ -46,7 +46,7 @@ export const NewRecording = (props) => {
     }
 
     createRecording(newRecording)
-      .then(() => props.history.push("/home"))
+      .then(() => props.history.goBack())
   }
 
 
@@ -126,14 +126,14 @@ export const NewRecording = (props) => {
 
 
       <Box>
-        <Text htmlFor="label">Enter excerpt name and take: </Text>
+        <Text htmlFor="label">Enter take number: </Text>
         <Box margin="small">
           <TextInput
             type="text"
             name="label"
             required
             autoFocus
-            placeholder="ex: Excerpt take 1"
+            placeholder="ex: Take 1, Take 2"
             value={currentRecording.label}
             onChange={handleChange}
           />
